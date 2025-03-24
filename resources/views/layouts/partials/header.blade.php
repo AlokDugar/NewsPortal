@@ -94,8 +94,11 @@
                 <li><a href="user-profile.html"><i data-feather="user"></i><span>Account</span></a></li>
                 <li><a href="email_inbox.html"><i data-feather="mail"></i><span>Inbox</span></a></li>
                 <li><a href="edit-profile.html"><i data-feather="settings"></i><span>Settings</span></a></li>
-                <li><a href="login.html"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
-              </ul>
+                <li><a href="{{route('auth.adminLogout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
+                <form id="logout-form" action="{{ route('auth.adminLogout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </ul>
             </li>
           </ul>
         </div>

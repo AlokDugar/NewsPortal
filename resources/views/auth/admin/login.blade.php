@@ -40,12 +40,13 @@
                 <div>
                 <div><a class="logo" href="index.html"><img class="img-fluid for-light" src="assets/images/logo/logo.png" alt="looginpage"></a></div>
                 <div class="login-main">
-                    <form class="theme-form">
+                    <form class="theme-form" action={{url('/adminlogin')}} method="POST">
+                    @csrf
                     <h4 class="text-center">Sign in to account</h4>
                     <p class="text-center">Enter your email & password to login</p>
                     <div class="form-group">
                         <label class="col-form-label">Email Address</label>
-                        <input class="form-control" type="email" required="" placeholder="demo@example.com">
+                        <input class="form-control" name="email" type="email" required="" placeholder="demo@example.com">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Password</label>
