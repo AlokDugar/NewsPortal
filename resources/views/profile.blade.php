@@ -6,7 +6,7 @@
         <div class="page-title">
             <div class="row">
             <div class="col-sm-6">
-                <h3>Edit Profile</h3>
+                <h3>My Profile</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb">
@@ -28,71 +28,96 @@
                     <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
                 </div>
                 <div class="card-body">
-                    <form  method="POST" action="{{ route('admin.updatePassword') }}">
+                    <form class="card" method="POST" action="{{ route('admin.updatePassword') }}" onsubmit="return validateForm()">
                         @csrf
-                    <div class="row mb-2">
-                        <div class="profile-title">
-                        <div class="d-lg-flex d-md-flex d-sm-flex align-items-center">
-                            <div class="p-image">
-                            <img class="img-100 rounded-circle profile-pic" alt="" src="assets/images/user/no-image.jpg">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-camera upload-button"></i>
-                                <input class="file-upload" type="file" accept="image/*"/>
+                        <div class="row mb-2">
+                            <div class="profile-title">
+                            <div class="d-lg-flex d-md-flex d-sm-flex align-items-center">
+                                <div class="p-image">
+                                <img class="img-100 rounded-circle profile-pic" alt="" src="{{ Auth::guard('admin')->user()->image_path ? asset('storage/' . Auth::guard('admin')->user()->image_path) : 'assets/images/user/no-image.jpg' }}">
+                                </div>
+                                <div class="flex-grow-1">
+                                <h3 class="mb-1 f-20 txt-primary"> <a href="user-profile.html" class="upload-button">{{Auth::guard('admin')->user()->name}}</a></h3>
+                                </div>
                             </div>
-                            </div>
-                            <div class="flex-grow-1">
-                            <h3 class="mb-1 f-20 txt-primary"> <a href="user-profile.html" class="upload-button">{{Auth::guard('admin')->user()->name}}</a></h3>
-                            <p class="f-12 mb-0">ADMIN</p>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label f-w-500">Old Password</label>
+                            <input class="form-control" id="old_password" name="old_password" type="password" required>
+                            <small id="old_password_error" ></small>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label f-w-500">Password</label>
-                        <input class="form-control" name='password' type="password" value="">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label f-w-500">Confirm Password</label>
-                        <input class="form-control" name='password_confirmation' type="password" value="">
-                    </div>
-                    <div class="form-footer">
-                        <button class="btn btn-primary btn-block">Change</button>
-                    </div>
+
+                        <div class="mb-3">
+                            <label class="form-label f-w-500">New Password</label>
+                            <input class="form-control" id="password" name="password" type="password" required>
+                            <small id="password_error" class="text-danger"></small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label f-w-500">Confirm Password</label>
+                            <input class="form-control" id="password_confirmation" name="password_confirmation" type="password" required>
+                            <small id="confirm_password_error" class="text-danger"></small>
+                        </div>
+
+                        <div class="card-footer text-center">
+                            <button class="btn btn-primary" type="submit" id="submit_button">Update Password</button>
+                        </div>
                     </form>
                 </div>
                 </div>
-            </div>
-            <div class="col-xl-8 col-lg-7">
-                <form class="card" method="POST" action="{{ route('admin.updateDetails') }}">
-                    @csrf
-                <div class="card-header pb-0">
-                    <h4 class="card-title mb-0">Edit Profile</h4>
-                    <div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                    <div class="col-sm-6 col-md-3">
-                        <div class="mb-3">
-                        <label class="form-label f-w-500">Name</label>
-                        <input class="form-control" type="text" name="name" placeholder="{{Auth::guard('admin')->user()->name}}">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="mb-3">
-                        <label class="form-label f-w-500">Email address</label>
-                        <input class="form-control" type="email" name="email" placeholder="{{Auth::guard('admin')->user()->email}}">
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="card-footer text-end">
-                    <button class="btn btn-primary" type="submit">Update Profile          </button>
-                </div>
-                </form>
             </div>
             </div>
         </div>
         </div>
         <!-- Container-fluid Ends-->
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const oldPassword = document.getElementById("old_password");
+    const oldPasswordError = document.getElementById("old_password_error");
+
+    let timeout = null;
+
+    oldPassword.addEventListener("input", function () {
+        clearTimeout(timeout);
+
+        let oldPasswordValue = oldPassword.value;
+
+        if (oldPasswordValue.length > 0) {
+            timeout = setTimeout(() => {
+                checkOldPassword(oldPasswordValue);
+            }, 200);
+        } else {
+            oldPasswordError.textContent = "";
+            oldPasswordError.style.color = "";
+        }
+    });
+
+    function checkOldPassword(password) {
+        fetch("{{ route('admin.checkOldPassword') }}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ old_password: password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.valid) {
+                oldPasswordError.textContent = "✔ Old password is correct.";
+                oldPasswordError.style.color = "green";
+            } else {
+                oldPasswordError.textContent = "✘ Old password is incorrect.";
+                oldPasswordError.style.color = "red";
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
+});
+
+
+    </script>
+
 @endsection

@@ -15,7 +15,8 @@ Route::get('/profile', function () {
     return view('profile');
 })->name('profile')->middleware(AdminAuth::class);
 Route::post('/admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.updatePassword');
-Route::post('/admin/update-details', [AdminController::class, 'updateDetails'])->name('admin.updateDetails');
+
+Route::post('/admin/check-old-password', [AdminController::class, 'checkOldPassword'])->name('admin.checkOldPassword');
 
 Route::middleware('guest:admin')->group(function () {
     Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('auth.adminLogin');

@@ -80,15 +80,15 @@
             </li>
             <li class="profile-nav onhover-dropdown dropdown">
               <div class="account-user">
-                <img alt="" src="assets/images/avtar/11.jpg">
+                <img alt="" src="{{ Auth::guard('admin')->user()->image_path ? asset('storage/' . Auth::guard('admin')->user()->image_path) : 'assets/images/user/no-image.jpg' }}">
               </div>
               <ul class="profile-dropdown show-div dropdown-menu">
                 <li>
                   <div class="main-header-profile header-img">
                     <div class="main-img-user">
-                      <img alt="" src="assets/images/avtar/11.jpg">
+                      <img alt="" src="{{ Auth::guard('admin')->user()->image_path ? asset('storage/' . Auth::guard('admin')->user()->image_path) : 'assets/images/user/no-image.jpg' }}">
                     </div>
-                    <h6>{{Auth::guard('admin')->user()->name}}</h6><span>Admin</span>
+                    <h6>{{Auth::guard('admin')->user()->name}}</h6>
                   </div>
                 </li>
                 <li><a href="{{route('profile')}}"><i data-feather="user"></i><span>Profile</span></a></li>
