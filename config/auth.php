@@ -107,7 +107,7 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
-            'table' => 'admin_password_resets',
+            'table' => 'admin_password_reset_tokens',
             'expire' => 60,
         ],
     ],
