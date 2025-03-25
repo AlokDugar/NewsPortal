@@ -95,7 +95,7 @@
                   <td style="padding: 30px">
                     <h6 style="font-weight: 600">Password Reset</h6>
                     <p>Forgot your password for Admin Dashboard? Click the button to reset your password.</p>
-                    <p style="text-align: center"><a href="auth-recoverpw.html" style="padding: 10px; background-color:#ff5d22; color: #fff; display: inline-block; border-radius:30px; font-weight:700; padding:0.6rem 1.75rem;">Reset Password</a></p>
+                    <p style="text-align: center"><a href="{{$resetUrl}}" style="padding: 10px; background-color:#ff5d22; color: #fff; display: inline-block; border-radius:30px; font-weight:700; padding:0.6rem 1.75rem;">Reset Password</a></p>
                     <p>If you remember your password, ignore this email.</p>
                     <p>Good luck! Hope it works.</p>
                     <p style="margin-bottom: 0">

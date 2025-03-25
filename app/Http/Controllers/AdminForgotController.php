@@ -33,11 +33,11 @@ class AdminForgotController extends Controller
         ]
     );
 
-    $resetUrl = 'https://example.com/dummy-reset-link';
+    $resetUrl = url(route('password.adminReset', ['token' => $token, 'email' => $request->email], false));
 
     Mail::to($request->email)->send(new AdminResetPasswordMail($resetUrl));
 
-    //return redirect()->route('auth.adminLogin')->with('success', 'Password reset link sent! Check your email.');
+    return redirect()->route('auth.adminLogin')->with('success', 'Password reset link sent! Check your email.');
 }
 
 }

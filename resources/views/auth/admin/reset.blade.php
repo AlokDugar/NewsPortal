@@ -44,27 +44,32 @@
               <div>
                 <div><a class="logo" href="index.html"><img class="img-fluid for-light" src="assets/images/logo/logo.png" alt="looginpage"></a></div>
                 <div class="login-main">
-                  <form class="theme-form">
+                  <form class="theme-form" action="{{ route('password.adminUpdate') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="token" value="{{ $token }}">
                     <h4>Reset Your Password</h4>
+                    <div class="form-group">
+                      <label class="col-form-label">Email</label>
+                      <div class="form-input position-relative">
+                        <input class="form-control" type="email" name="email" required="" placeholder="demo@example.com">
+                        <div class="show-hide"><span class="show"></span></div>
+                      </div>
+                      @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
                     <div class="form-group">
                       <label class="col-form-label">New Password</label>
                       <div class="form-input position-relative">
-                        <input class="form-control" type="password" name="" required="" placeholder="*********">
+                        <input class="form-control" type="password" name="password" required="" placeholder="*********">
                         <div class="show-hide"><span class="show"></span></div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-form-label">Confirm Password</label>
-                      <input class="form-control" type="password" name="" required="" placeholder="*********">
+                      <input class="form-control" type="password" name="password_confirmation" required="" placeholder="*********">
                     </div>
                     <div class="form-group mb-0">
-                      <div class="checkbox p-0">
-                        <input id="checkbox1" type="checkbox">
-                        <label class="text-muted" for="checkbox1">Remember password</label>
-                      </div>
                       <button class="btn btn-primary btn-block w-100 mt-3" type="submit">Done                          </button>
                     </div>
-                    <p class="mt-4 mb-0">Don't have account?<a class="ms-2" href="auth-register.html">Create Account</a></p>
                   </form>
                 </div>
               </div>
