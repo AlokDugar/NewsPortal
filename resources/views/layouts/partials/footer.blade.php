@@ -1,3 +1,12 @@
-<div>
-    <!-- If you do not have a consistent goal in life, you can not live it in a consistent way. - Marcus Aurelius -->
-</div>
+<footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 p-0 footer-left">
+          <p class="mb-0">Copyright © <script>document.write(new Date().getFullYear())</script>. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 p-0 footer-right">
+
+        </div>
+      </div>
+    </div>
+  </footer>

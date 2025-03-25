@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminForgotController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminResetController;
@@ -10,6 +11,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->middleware(AdminAuth::class);
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile')->middleware(AdminAuth::class);
+Route::post('/admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.updatePassword');
+Route::post('/admin/update-details', [AdminController::class, 'updateDetails'])->name('admin.updateDetails');
 
 Route::middleware('guest:admin')->group(function () {
     Route::get('/adminlogin', [AdminLoginController::class, 'showLoginForm'])->name('auth.adminLogin');

@@ -11,7 +11,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
               <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div>

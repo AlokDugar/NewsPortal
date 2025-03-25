@@ -21,7 +21,7 @@
               <h6>Pinned</h6>
             </li>
             <hr>
-            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="index.html"><i data-feather="home"></i><span>Dashboard</span></a>
+            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{url('/')}}"><i data-feather="home"></i><span>Dashboard</span></a>
             </li>
           </ul>
         </div>

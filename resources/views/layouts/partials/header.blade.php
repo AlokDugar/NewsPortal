@@ -88,10 +88,10 @@
                     <div class="main-img-user">
                       <img alt="" src="assets/images/avtar/11.jpg">
                     </div>
-                    <h6>Elizabeth Jane</h6><span>Premium Member</span>
+                    <h6>{{Auth::guard('admin')->user()->name}}</h6><span>Admin</span>
                   </div>
                 </li>
-                <li><a href="user-profile.html"><i data-feather="user"></i><span>Account</span></a></li>
+                <li><a href="{{route('profile')}}"><i data-feather="user"></i><span>Account</span></a></li>
                 <li><a href="email_inbox.html"><i data-feather="mail"></i><span>Inbox</span></a></li>
                 <li><a href="edit-profile.html"><i data-feather="settings"></i><span>Settings</span></a></li>
                 <li><a href="{{route('auth.adminLogout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
