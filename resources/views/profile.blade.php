@@ -87,7 +87,7 @@
         if (oldPasswordValue.length > 0) {
             timeout = setTimeout(() => {
                 checkOldPassword(oldPasswordValue);
-            }, 200);
+            }, 500);
         } else {
             oldPasswordError.textContent = "";
             oldPasswordError.style.color = "";
