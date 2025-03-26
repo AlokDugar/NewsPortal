@@ -25,5 +25,32 @@ class DatabaseSeeder extends Seeder
             'email'=>'alokdugar4@gmail.com',
             'password' => Hash::make('123456')
         ]);
+        DB::table('news_categories')->insert([
+            [
+            'name' => 'Alok Dugar',
+            'status' => 'Active',
+            'url'=>'https://www.google.co.uk/'
+            ],
+            [
+                'name'=> 'Manish',
+                'status'=>'Pending',
+                'url'=>'https://www.google.co.uk/'
+            ]
+        ]);
+        DB::table('types')->insert([
+            [
+                'id' => 1,
+                'name' => 'Breaking News'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Trending News'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Alok'
+            ],
+        ]);
+
     }
 }

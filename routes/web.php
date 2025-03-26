@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminForgotController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminResetController;
+use App\Http\Controllers\NewsCategoryController;
+use App\Http\Controllers\TypeController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -11,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 })->middleware(AdminAuth::class);
+
 Route::get('/profile', function () {
     return view('profile');
 })->name('profile')->middleware(AdminAuth::class);
+
+Route::resource('categories',NewsCategoryController::class)->middleware(AdminAuth::class);
+Route::resource('types',TypeController::class)->middleware(AdminAuth::class);
+
 Route::post('/admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.updatePassword')->middleware(AdminAuth::class);
 
 Route::post('/admin/check-old-password', [AdminController::class, 'checkOldPassword'])->name('admin.checkOldPassword')->middleware(AdminAuth::class);
@@ -35,3 +42,5 @@ Route::post('/adminlogout', function () {
     request()->session()->regenerateToken();
     return redirect('/adminlogin')->with('success', 'You have been logged out!');
 })->name('auth.adminLogout')->middleware(AdminAuth::class);
+
+Route::post('/categories-update-status',[NewsCategoryController::class,'updateStatus'])->name('categories.updateStatus')->middleware(AdminAuth::class);

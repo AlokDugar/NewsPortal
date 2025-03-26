@@ -18,6 +18,10 @@
             <hr>
             <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{url('/')}}"><i data-feather="home"></i><span>Dashboard</span></a>
             </li>
+            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('categories.index')}}"><i data-feather="list"></i><span>Categories</span></a>
+            </li>
+            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('types.index')}}"><i data-feather="list"></i><span>Types</span></a>
+            </li>
           </ul>
         </div>
         <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
