@@ -21,7 +21,6 @@
         <div class="container-fluid">
         <div class="edit-profile">
             <div class="row">
-            <div class="col-xl-4 col-lg-5">
                 <div class="card">
                 <div class="card-header pb-0">
                     <h4 class="card-title mb-0">Change Password</h4>
@@ -66,7 +65,6 @@
                     </form>
                 </div>
                 </div>
-            </div>
             </div>
         </div>
         </div>
