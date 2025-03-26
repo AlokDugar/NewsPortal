@@ -51,7 +51,6 @@
                                         <label for="status" class="form-label">Status</label>
                                         <select class="form-select" name="status" id="status" required>
                                             <option value="Active">Active</option>
-                                            <option value="Pending">Pending</option>
                                             <option value="Inactive">Inactive</option>
                                         </select>
                                     </div>
@@ -89,9 +88,7 @@
                                         <span class="badge status-info
                                             @if($cat->status == 'Active')
                                                 bg-success
-                                            @elseif($cat->status == 'Pending')
-                                                bg-warning
-                                            @elseif($cat->status == 'Inactive')
+                                            @else
                                                 bg-danger
                                             @endif"
                                             data-cat-id="{{$cat->id}}"
@@ -102,9 +99,6 @@
                                     <div class="dropdown-menu dropdown-menu-end status-dropdown-menu">
                                         <button type="submit" class="dropdown-item" name="status" value="Active">
                                             <i class="fas fa-check-circle status-icon active-icon" style="color: rgb(85, 255, 0);"></i> Active
-                                        </button>
-                                        <button type="submit" class="dropdown-item" name="status" value="Pending">
-                                            <i class="fas fa-hourglass-half status-icon pending-icon" style="color: rgb(242, 255, 0);"></i> Pending
                                         </button>
                                         <button type="submit" class="dropdown-item" name="status" value="Inactive">
                                             <i class="fas fa-times-circle status-icon inactive-icon" style="color: rgb(255, 0, 0);"></i> Inactive
@@ -153,7 +147,6 @@
                                                     <label for="status" class="form-label">Status</label>
                                                     <select class="form-select" name="status" id="status" required>
                                                         <option value="Active" {{ $cat->status == 'Active' ? 'selected' : '' }}>Active</option>
-                                                        <option value="Pending" {{ $cat->status == 'Pending' ? 'selected' : '' }}>Pending</option>
                                                         <option value="Inactive" {{ $cat->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
                                                     </select>
                                                 </div>

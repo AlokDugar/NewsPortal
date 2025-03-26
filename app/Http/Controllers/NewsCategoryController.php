@@ -32,7 +32,7 @@ class NewsCategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'url' => 'required|string|max:255',
-            'status' => 'required|string',
+            'status' => 'required|string|in:Active,Inactive',
         ]);
 
         NewsCategory::create([
@@ -69,7 +69,7 @@ class NewsCategoryController extends Controller
         $request->validate([
             'name' => 'required|string',
             'url' => 'required|string',
-            'status' => 'required|in:Active,Pending,Inactive',
+            'status' => 'required|in:Active,Inactive',
         ]);
 
         $category = NewsCategory::findOrFail($id);
