@@ -6,12 +6,13 @@
       <div class="page-title">
         <div class="row">
           <div class="col-sm-6">
-            <h3>Types</h3>
+            <h3>News Types</h3>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{url('/')}}">NewsPortal</a></li>
-              <li class="breadcrumb-item active">Types</li>
+              <li class="breadcrumb-item active">News</li>
+              <li class="breadcrumb-item active">News Types</li>
             </ol>
           </div>
         </div>
@@ -21,7 +22,7 @@
           <div class="col-sm-12">
             <div class="card">
                 <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0">Types Table</h4>
+                    <h4 class="mb-0">News Types Table</h4>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
                         Create Type
                     </button>
