@@ -16,15 +16,18 @@
               <h6>Pinned</h6>
             </li>
             <hr>
-            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{url('/')}}"><i data-feather="home"></i><span>Dashboard</span></a>
+            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{url('/')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
+            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="menu"></i><span>News</span></a>
+                <ul class="sidebar-submenu">
+                  <li><a href="{{route('categories.index')}}">Categories</a></li>
+                  <li><a href="{{route('types.index')}}">Types</a></li>
+                </ul>
             </li>
-            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('categories.index')}}"><i data-feather="list"></i><span>Categories</span></a>
-            </li>
-            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('types.index')}}"><i data-feather="list"></i><span>Types</span></a>
-            </li>
-            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('ads.index')}}"><i data-feather="list"></i><span>ADs</span></a>
-            </li>
-            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('adTypes.index')}}"><i data-feather="list"></i><span>AD Types</span></a>
+            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="menu"></i><span>Advertisements</span></a>
+                <ul class="sidebar-submenu">
+                  <li><a href="{{route('ads.index')}}">ADs</a></li>
+                  <li><a href="{{route('adTypes.index')}}">AD Types</a></li>
+                </ul>
             </li>
           </ul>
         </div>
