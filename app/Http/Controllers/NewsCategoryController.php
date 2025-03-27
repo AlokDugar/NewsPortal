@@ -30,8 +30,8 @@ class NewsCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'url' => 'required|string|max:255',
+            'name' => 'required|string',
+            'url' => 'required|string',
             'status' => 'required|string|in:Active,Inactive',
         ]);
 
@@ -95,7 +95,7 @@ class NewsCategoryController extends Controller
     {
         $request->validate([
             'cat_id' => 'required|exists:news_categories,id',
-            'status' => 'required|in:Active,Pending,Inactive',
+            'status' => 'required|in:Active,Inactive',
         ]);
 
         $category = NewsCategory::find($request->cat_id);

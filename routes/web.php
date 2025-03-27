@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminForgotController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminResetController;
+use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\AdvertisementTypeController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\TypeController;
 use App\Http\Middleware\AdminAuth;
@@ -20,6 +22,8 @@ Route::get('/profile', function () {
 
 Route::resource('categories',NewsCategoryController::class)->middleware(AdminAuth::class);
 Route::resource('types',TypeController::class)->middleware(AdminAuth::class);
+Route::resource('ads',AdvertisementController::class)->middleware(AdminAuth::class);
+Route::resource('adTypes',AdvertisementTypeController::class)->middleware(AdminAuth::class);
 
 Route::post('/admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.updatePassword')->middleware(AdminAuth::class);
 
@@ -44,3 +48,4 @@ Route::post('/adminlogout', function () {
 })->name('auth.adminLogout')->middleware(AdminAuth::class);
 
 Route::post('/categories-update-status',[NewsCategoryController::class,'updateStatus'])->name('categories.updateStatus')->middleware(AdminAuth::class);
+Route::post('/ads-update-status',[AdvertisementController::class,'updateStatus'])->name('ads.updateStatus')->middleware(AdminAuth::class);

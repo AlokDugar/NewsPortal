@@ -22,6 +22,10 @@
             </li>
             <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('types.index')}}"><i data-feather="list"></i><span>Types</span></a>
             </li>
+            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('ads.index')}}"><i data-feather="list"></i><span>ADs</span></a>
+            </li>
+            <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{route('adTypes.index')}}"><i data-feather="list"></i><span>AD Types</span></a>
+            </li>
           </ul>
         </div>
         <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

@@ -78,6 +78,23 @@
 <script src="assets/js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+<script>
+    // This function is triggered when the user selects a file
+    function updateFileName(input) {
+        // Remove the 'No file chosen' text
+        input.nextElementSibling.innerHTML = 'Choose another file';
+    }
+
+    // Remove 'No file chosen' text when the page loads if there's a file selected
+    document.addEventListener('DOMContentLoaded', function() {
+        let fileInput = document.getElementById('details');
+        if (fileInput && fileInput.value) {
+            fileInput.nextElementSibling.innerHTML = 'Choose another file';  // Set text to 'Choose another file'
+        }
+    });
+</script>
+
     </body>
 
 
