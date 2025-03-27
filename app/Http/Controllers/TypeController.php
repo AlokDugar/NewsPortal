@@ -35,6 +35,7 @@ class TypeController extends Controller
 
         $type = new Type();
         $type->name = $request->name;
+        $type->allow_delete=$request->has('allow_delete');
         $type->save();
 
         return redirect()->route('types.index')->with('success', 'Type created successfully!');

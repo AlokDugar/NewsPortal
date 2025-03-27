@@ -27,28 +27,33 @@
                     </button>
                 </div>
                 <div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="createCategoryModalLabel">Create Type</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('types.store') }}" method="POST">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="typeName" class="form-label">Type Name</label>
-                                        <input type="text" class="form-control" id="typeName" name="name" required>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Create Type</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCategoryModalLabel">Create Type</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('types.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="typeName" class="form-label">Type Name</label>
+                        <input type="text" class="form-control" id="typeName" name="name" required>
                     </div>
-                </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="allowDelete" name="allow_delete" value="1" checked>
+                        <label class="form-check-label" for="allowDelete">Allow Delete</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create Type</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
               <div class="card-body">
                 <div class="dt-ext table-responsive theme-scrollbar">
                   <table class="display keytable">
@@ -70,7 +75,7 @@
                                     </a>
                                 </li>
                                 <li class="delete">
-                                    <a href="javascript:void(0);" class="delete-btn" data-id="{{ $type->id }}">
+                                    <a href="javascript:void(0);"  class="delete-btn {{ (!$type->allow_delete) ? 'disabled' : '' }}"  data-id="{{ $type->id }}" data-allow-delete="{{$type->allow_delete}}">
                                         <i data-feather="trash-2"></i>
                                     </a>
                                 </li>
@@ -118,10 +123,11 @@
     document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', function(e) {
             const typeId = e.currentTarget.getAttribute('data-id');
-            if (typeId === '1' || typeId === '2') {
+            const allowDelete = e.currentTarget.getAttribute('data-allow-delete');
+            console.log(allowDelete);
+            if (allowDelete=='0') {
             Swal.fire({
                 title: 'Deletion not allowed!',
-                text: "This type isn't allowed to be deleted.",
                 icon: 'error',
                 confirmButtonText: 'OK'
             });

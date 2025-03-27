@@ -15,13 +15,14 @@ return new class extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('allow_delete')->default(true);
             $table->timestamps();
         });
         DB::unprepared("
             CREATE TRIGGER prevent_deletion BEFORE DELETE ON types
             FOR EACH ROW
             BEGIN
-                IF OLD.id IN (1, 2) THEN
+                IF OLD.allow_delete = 0 THEN
                     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Deletion of this record is not allowed';
                 END IF;
             END;

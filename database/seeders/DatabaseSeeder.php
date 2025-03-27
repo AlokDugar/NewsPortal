@@ -33,22 +33,25 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name'=> 'Manish',
-                'status'=>'Pending',
+                'status'=>'Inactive',
                 'url'=>'https://www.google.co.uk/'
             ]
         ]);
         DB::table('types')->insert([
             [
                 'id' => 1,
-                'name' => 'Breaking News'
+                'name' => 'Breaking News',
+                'allow_delete' => false
             ],
             [
                 'id' => 2,
-                'name' => 'Trending News'
+                'name' => 'Trending News',
+                'allow_delete' => false
             ],
             [
                 'id' => 3,
-                'name' => 'Alok'
+                'name' => 'Alok',
+                'allow_delete' => true
             ],
         ]);
 
