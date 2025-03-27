@@ -49,3 +49,4 @@ Route::post('/adminlogout', function () {
 
 Route::post('/categories-update-status',[NewsCategoryController::class,'updateStatus'])->name('categories.updateStatus')->middleware(AdminAuth::class);
 Route::post('/ads-update-status',[AdvertisementController::class,'updateStatus'])->name('ads.updateStatus')->middleware(AdminAuth::class);
+

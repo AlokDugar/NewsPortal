@@ -99,7 +99,13 @@
                             <tr>
                             <td>{{ $ad->AdvertisementType->type }}</td>
                             <td>
-                                <img src="{{ Str::startsWith($ad->details, 'http') ? $ad->details : asset('storage/' . $ad->details) }}" width="100" height="50">
+                                @if($ad->AdvertisementType->type === 'Video')
+                                    <video width="100" height="50" controls autoplay>
+                                        <source src="{{ Str::startsWith($ad->details, 'http') ? $ad->details : asset('storage/' . $ad->details) }}" type="video/mp4">
+                                    </video>
+                                @else
+                                    <img src="{{ Str::startsWith($ad->details, 'http') ? $ad->details : asset('storage/' . $ad->details) }}" width="100" height="50" alt="Advertisement Image">
+                                @endif
                             </td>
                             <td>{{ $ad->url }}</td>
                             <td>
@@ -171,30 +177,23 @@
 
                         <!-- Advertisement Image (Upload or URL) -->
                         <div class="mb-3">
-                            <label>Advertisement Image (Upload an image file OR provide an image URL)</label>
+                            <label>Advertisement (Upload a file OR provide an URL)</label>
                         </div>
-                        @if(!filter_var($ad->details, FILTER_VALIDATE_URL) && $ad->details)
-    <div class="mb-3">
-        <label class="form-label">Image Preview</label>
-        <img src="{{ asset('storage/' . $ad->details) }}" width="100" height="50" alt="Current Advertisement Image">
-    </div>
-@endif
-
-<div class="mb-3">
-    <label for="details" class="form-label">Upload</label>
-    <input type="file" class="form-control" id="details" name="details" onchange="updateFileName(this)">
-</div>
-
-
-
-
-                        <!-- Image Preview if Image is a URL -->
-                        @if(filter_var($ad->details, FILTER_VALIDATE_URL))
                             <div class="mb-3">
-                                <label class="form-label">Image Preview</label>
-                                <img src="{{ $ad->details }}" width="100" height="50" alt="Image Preview">
+                                <label class="form-label">AD Preview</label>
+                                @if($ad->AdvertisementType->type === 'Video')
+                                    <video width="100" height="50" controls autoplay>
+                                        <source src="{{ Str::startsWith($ad->details, 'http') ? $ad->details : asset('storage/' . $ad->details) }}" type="video/mp4">
+                                    </video>
+                                @else
+                                    <img src="{{ Str::startsWith($ad->details, 'http') ? $ad->details : asset('storage/' . $ad->details) }}" width="100" height="50" alt="Advertisement Image">
+                                @endif
                             </div>
-                        @endif
+
+                            <div class="mb-3">
+                                <label for="details" class="form-label">Upload</label>
+                                <input type="file" class="form-control" id="details" name="details" onchange="updateFileName(this)">
+                            </div>
                     <!-- Image URL (Optional) -->
                     <div class="mb-3">
                         <label for="image_url" class="form-label">Image URL (Optional)</label>

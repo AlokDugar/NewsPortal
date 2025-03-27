@@ -33,7 +33,7 @@ class AdvertisementController extends Controller
     {
         $request->validate([
             'type_id' => 'required|string',
-            'details'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'details'   => 'nullable|mimes:jpeg,png,jpg,gif,mp4,mov,avi',
             'image_url' => 'nullable|url',
             'url' => 'required|string',
             'status' => 'required|string|in:Active,Inactive',
@@ -84,7 +84,7 @@ class AdvertisementController extends Controller
     {
         $request->validate([
             'type_id' => 'required|string',
-            'details'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'details'   => 'nullable|mimes:jpeg,png,jpg,gif,mp4,mov,avi',
             'image_url' => 'nullable|url',
             'url' => 'required|string',
             'status' => 'required|string|in:Active,Inactive',
