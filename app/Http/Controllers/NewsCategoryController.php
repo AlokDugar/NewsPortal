@@ -41,7 +41,7 @@ class NewsCategoryController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Category created successfully!');
+        return redirect()->back()->with('success', 'Category created successfully!');
     }
 
 
@@ -89,7 +89,7 @@ class NewsCategoryController extends Controller
         $category = NewsCategory::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully!');
+        return redirect()->back()->with('success', 'Category deleted successfully!');
     }
     public function updateStatus(Request $request)
     {

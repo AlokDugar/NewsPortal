@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NewsCategory;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
-class TypeController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $cats=NewsCategory::all();
         $types=Type::all();
-        return view('dashboard.types',compact('types'));
+        return view('dashboard.news_details',compact('cats', 'types'));
     }
 
     /**
@@ -29,16 +31,7 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-        ]);
-
-        $type = new Type();
-        $type->name = $request->name;
-        $type->allow_delete=$request->has('allow_delete');
-        $type->save();
-
-        return redirect()->back()->with('success', 'Type created successfully!');
+        //
     }
 
     /**
@@ -60,25 +53,16 @@ class TypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
-        $type = Type::findOrFail($id);
-        $type->update([
-            'name' => $request->input('name')
-        ]);
-
-        return redirect()->back()->with('success', 'Type updated successfully!');
+        //
     }
-
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $type = Type::findOrFail($id);
-        $type->delete();
-
-        return redirect()->back()->with('success', 'Category deleted successfully!');
+        //
     }
 }

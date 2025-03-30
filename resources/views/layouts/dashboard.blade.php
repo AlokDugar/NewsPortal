@@ -22,6 +22,8 @@
         <!-- Custom css-->
         <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
         <!-- <link rel="stylesheet" type="text/css" href="assets/css/responsive.css"> -->
+        @stack('css')
+
 
     </head>
 
@@ -38,7 +40,6 @@
                 @include('layouts.partials.footer')
             </div>
         </div>
-        <!-- latest jquery -->
         <script src="assets/js/jquery-3.6.0.min.js"></script>
         <!-- Bootstrap js -->
         <script src="assets/vendor/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -51,32 +52,14 @@
         <!-- Sidebar jquery -->
         <script src="assets/vendor/libs/pages/config.js"></script>
         <script src="assets/vendor/libs/pages/sidebar-menu.js"></script>
-        <!-- Datatables -->
-        <script src="assets/vendor/libs/datatable/datatables/js/jquery.dataTables.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.buttons.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/jszip.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.colVis.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/pdfmake.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/vfs_fonts.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.autoFill.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.select.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.bootstrap4.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.html5.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.print.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.bootstrap4.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.responsive.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/responsive.bootstrap4.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.keyTable.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.colReorder.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.fixedHeader.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.rowReorder.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.scroller.min.js"></script>
-        <script src="assets/vendor/libs/datatable/datatable-extension/js/custom.js"></script>
+
         <!-- Tooltip init -->
         <script src="assets/js/pages/tooltip-init.js"></script>
         <!-- Template js -->
         <script src="assets/js/script.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        @stack('scripts')
+
 
     </body>
 

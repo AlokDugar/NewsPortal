@@ -23,15 +23,15 @@
                     <div class="card">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">News Types Table</h4>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTypeModal">
                                 Create Type
                             </button>
                         </div>
-                        <div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="createTypeModal" tabindex="-1" aria-labelledby="createTypeModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="createCategoryModalLabel">Create Type</h5>
+                                        <h5 class="modal-title" id="createTypeModalLabel">Create Type</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -116,7 +116,29 @@
         </div>
     </div>
 </div>
-
+@endsection
+@push('scripts')
+<script src="assets/vendor/libs/datatable/datatables/js/jquery.dataTables.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.buttons.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/jszip.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.colVis.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/pdfmake.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/vfs_fonts.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.autoFill.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.select.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.bootstrap4.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.html5.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.print.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.bootstrap4.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.responsive.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/responsive.bootstrap4.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.keyTable.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.colReorder.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.fixedHeader.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.rowReorder.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.scroller.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/custom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', function(e) {
@@ -174,4 +196,4 @@
     });
 </script>
 
-@endsection
+@endpush

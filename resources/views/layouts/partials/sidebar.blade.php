@@ -21,6 +21,7 @@
                 <ul class="sidebar-submenu">
                   <li><a href="{{route('categories.index')}}">Categories</a></li>
                   <li><a href="{{route('types.index')}}">Types</a></li>
+                  <li><a href="{{route('news.index')}}">Details</a></li>
                 </ul>
             </li>
             <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="menu"></i><span>Advertisements</span></a>

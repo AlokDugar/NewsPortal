@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminResetController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AdvertisementTypeController;
 use App\Http\Controllers\NewsCategoryController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\TypeController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,7 @@ Route::resource('categories',NewsCategoryController::class)->middleware(AdminAut
 Route::resource('types',TypeController::class)->middleware(AdminAuth::class);
 Route::resource('ads',AdvertisementController::class)->middleware(AdminAuth::class);
 Route::resource('adTypes',AdvertisementTypeController::class)->middleware(AdminAuth::class);
+Route::resource('news',NewsController::class)->middleware(AdminAuth::class);
 
 Route::post('/admin/update-password', [AdminController::class, 'updatePassword'])->name('admin.updatePassword')->middleware(AdminAuth::class);
 
