@@ -15,9 +15,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $cats=NewsCategory::all();
-        $types=Type::all();
-        return view('dashboard.news_details',compact('cats', 'types'));
+        $newsDetails=NewsDetails::all();
+        return view('dashboard.news_details',compact('newsDetails'));
     }
 
     /**
@@ -25,7 +24,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        $cats=NewsCategory::all();
+        $types=Type::all();
+        return view('dashboard.news_create',compact('cats', 'types'));
     }
 
     /**
@@ -135,6 +136,14 @@ class NewsController extends Controller
             $url = asset('media/' . $fileName);
             return response()->json(['fileName' => $fileName, 'uploaded' => 1,'url' => $url]);
         }
+    }
+
+    public function showDashboard(){
+        $totalCount = NewsDetails::count();
+        $publishedCount = NewsDetails::where('state', 'Published')->count();
+        $unpublishedCount = NewsDetails::where('state', 'Unpublished')->count();
+
+        return view('dashboard.NewsDashboard', compact('totalCount', 'publishedCount', 'unpublishedCount'));
     }
 }
 

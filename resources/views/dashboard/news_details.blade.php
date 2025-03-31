@@ -1,223 +1,145 @@
 @extends('layouts.dashboard')
-@push('css')
-<style>
-    .tag-container {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-    }
 
-    .tag-pill {
-        display: inline-block;
-        padding: 8px 12px;
-        border-radius: 20px;
-        background-color: #f1f1f1;
-        color: #333;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .tag-pill.active {
-        background-color: rgb(255, 98, 0);
-        color: white;
-    }
-
-
-</style>
-@endpush
 @section('content')
-    <div class="page-body">
-        <div class="container-fluid">
+<div class="page-body">
+    <div class="container-fluid">
         <div class="page-title">
             <div class="row">
-            <div class="col-sm-6">
-                <h3>Create News Article</h3>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">NewsPortal</a></li>
-                <li class="breadcrumb-item">News</li>
-                <li class="breadcrumb-item active"> News Details</li>
-                </ol>
-            </div>
+                <div class="col-sm-6">
+                    <h3>News Details</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">NewsPortal</a></li>
+                        <li class="breadcrumb-item active">News</li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
             </div>
         </div>
-        </div>
 
-      <!-- News Creation Form -->
-      <div class="container-fluid px-0">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="card">
-              <div class="card-body">
-                <form action="{{route('news.store')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                  <div class="mb-3">
-                    <label for="title" class="form-label">शीर्षक *</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="Start off your News by writing an engaging title">
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">तस्वीर *</label>
-                    <div class="d-lg-flex d-md-flex d-sm-flex align-items-center">
-                        <div class="p-image">
-                            <img class="img-100 square profile-pic" alt="" src="">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-plus" onclick="document.getElementById('profile_image').click();"></i>
-                                <input class="file-upload" id="profile_image" type="file" name="image_path" accept="image/*" style="display:none;" />
-                          </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h4 class="mb-0">News Details Table</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="dt-ext table-responsive theme-scrollbar">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Image</th>
+                                            <th>Type</th>
+                                            <th>Categories</th>
+                                            <th>Author</th>
+                                            <th>Publisher</th>
+                                            <th>State</th>
+                                            <th>Content</th>
+                                            <th>Created At</th>
+                                            <th>Updated At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($newsDetails as $news)
+                                            <tr>
+                                                <td>{{ $news->title }}</td>
+                                                <td>
+                                                    <img src="{{ asset('storage/' . $news->image_path) }}" alt="News Image" width="100" height="100">
+                                                </td>
+                                                <td>{{ $news->type->name ?? 'N/A' }}</td>
+                                                <td>
+                                                    {{ implode(', ', $news->categories->pluck('name')->toArray()) }}
+                                                </td>
+                                                <td>{{ $news->author }}</td>
+                                                <td>{{ $news->state }}</td>
+                                                <td>{{ Str::limit($news->content, 50) }}</td> <!-- Limiting content to 50 characters -->
+                                                <td>{{ $news->created_at->format('d M Y H:i') }}</td>
+                                                <td>{{ $news->updated_at->format('d M Y H:i') }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">वर्गीकरण *</label>
-                    <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="category_ids[]">
-                        @foreach ($cats as $cat)
-                            <option value="{{$cat->id}}">{{$cat->name}}</option>
-                        @endforeach
-                    </select>
-                    <button type="button" id="add-category" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createCategoryModal">Add Category</button>
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">प्रकार *</label>
-                    <div class="tag-container" id="types-container">
-                        @foreach ($types as $type)
-                            <span class="tag-pill">
-                                {{$type->name}}
-                                <input type="hidden" name="type_id" value="{{$type->id}}">
-                            </span>
-                        @endforeach
-                    </div>
-                    <button type="button" id="add-type" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createTypeModal">Add Type</button>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="author" class="form-label">लेखक</label>
-                    <input type="text" class="form-control" name="author" id="author" placeholder="Author">
-                  </div>
-                  <div class="mb-3">
-                    <label for="publisher" class="form-label">प्रकाशक</label>
-                    <input type="text" class="form-control" name="publisher" id="publisher" placeholder="Publisher">
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="state" class="form-label">स्थिति</label>
-                    <select class="form-select" name="state" id="state">
-                      <option>Select State</option>
-                      <option>Published</option>
-                      <option>Unpublished</option>
-                    </select>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="article-content" class="form-label">विवरण सामग्री</label>
-                    <textarea name="content" id="editor" class="ckeditor rich-text-editor border p-2"></textarea>
-                  </div>
-
-                  <div class="text-end mt-4">
-                    <button type="button" class="btn btn-secondary me-2">Cancel</button>
-                    <button type="submit" class="btn btn-primary">नयाँ पत्रकारिता</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createCategoryModalLabel">Create Category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('categories.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Category Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="url" class="form-label">URL</label>
-                            <input type="text" class="form-control" id="url" name="url" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" name="status" id="status" required>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Create Category</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
-      </div>
-      <div class="modal fade" id="createTypeModal" tabindex="-1" aria-labelledby="createTypeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createTypeModalLabel">Create Type</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('types.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="typeName" class="form-label">Type Name</label>
-                            <input type="text" class="form-control" id="typeName" name="name" required>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="allowDelete" name="allow_delete" value="1" checked>
-                            <label class="form-check-label" for="allowDelete">Allow Delete</label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Create Type</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+
     </div>
-    </div>
+</div>
 @endsection
 @push('scripts')
-    <script>
-        document.querySelectorAll(".tag-pill").forEach(tag => {
-        tag.addEventListener("click", function () {
-            document.querySelectorAll(".tag-pill").forEach(t => t.classList.remove("active"));
-            this.classList.add("active");
+<script src="assets/vendor/libs/datatable/datatables/js/jquery.dataTables.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.buttons.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/jszip.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.colVis.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/pdfmake.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/vfs_fonts.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.autoFill.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.select.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.bootstrap4.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.html5.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/buttons.print.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.bootstrap4.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.responsive.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/responsive.bootstrap4.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.keyTable.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.colReorder.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.fixedHeader.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.rowReorder.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/dataTables.scroller.min.js"></script>
+<script src="assets/vendor/libs/datatable/datatable-extension/js/custom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const categoryId = e.currentTarget.getAttribute('data-id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: '{{ session("success") }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = '/categories/' + categoryId;
+
+                            const methodField = document.createElement('input');
+                            methodField.type = 'hidden';
+                            methodField.name = '_method';
+                            methodField.value = 'DELETE';
+                            form.appendChild(methodField);
+
+                            const csrfToken = document.createElement('input');
+                            csrfToken.type = 'hidden';
+                            csrfToken.name = '_token';
+                            csrfToken.value = '{{ csrf_token() }}';
+                            form.appendChild(csrfToken);
+
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    });
+                }
             });
         });
-    </script>
-    <script src="assets/vendor/libs/select2/js/select2.full.min.js"></script>
-    <script src="assets/vendor/libs/select2/js/select2-custom.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-        .create(document.querySelector('#editor'),
-        {
-            ckfinder:
-            {
-                uploadUrl:"{{route('news.upload',['_token'=>csrf_token()])}}",
-            }
-        })
-        .catch(error=>{
-            console.error(error);
-        });
-    </script>
-
-
+    });
+</script>
 @endpush
