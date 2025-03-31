@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('image_path');
-            $table->foreignId('category_id')->constrained('news_categories')->onDelete('cascade');
             $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->string('author');
             $table->string('publisher');
             $table->string('state');
-            $table->string('description');
+            $table->longText('content');
             $table->timestamps();
         });
     }

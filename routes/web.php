@@ -10,6 +10,7 @@ use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\TypeController;
 use App\Http\Middleware\AdminAuth;
+use App\Models\NewsCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,4 +52,6 @@ Route::post('/adminlogout', function () {
 
 Route::post('/categories-update-status',[NewsCategoryController::class,'updateStatus'])->name('categories.updateStatus')->middleware(AdminAuth::class);
 Route::post('/ads-update-status',[AdvertisementController::class,'updateStatus'])->name('ads.updateStatus')->middleware(AdminAuth::class);
+
+Route::post('/news/upload-image', [NewsController::class,'upload'])->name('news.upload');
 

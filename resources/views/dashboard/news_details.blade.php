@@ -21,6 +21,8 @@
         background-color: rgb(255, 98, 0);
         color: white;
     }
+
+
 </style>
 @endpush
 @section('content')
@@ -48,10 +50,11 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-body">
-                <form>
+                <form action="{{route('news.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
                   <div class="mb-3">
                     <label for="title" class="form-label">शीर्षक *</label>
-                    <input type="text" class="form-control" id="title" placeholder="Start off your News by writing an engaging title">
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Start off your News by writing an engaging title">
                   </div>
 
                   <div class="mb-3">
@@ -69,7 +72,7 @@
 
                   <div class="mb-3">
                     <label class="form-label">वर्गीकरण *</label>
-                    <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="categories[]">
+                    <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="category_ids[]">
                         @foreach ($cats as $cat)
                             <option value="{{$cat->id}}">{{$cat->name}}</option>
                         @endforeach
@@ -83,7 +86,7 @@
                         @foreach ($types as $type)
                             <span class="tag-pill">
                                 {{$type->name}}
-                                <input type="hidden" name="types[]" value="{{$type->id}}">
+                                <input type="hidden" name="type_id" value="{{$type->id}}">
                             </span>
                         @endforeach
                     </div>
@@ -92,16 +95,16 @@
 
                   <div class="mb-3">
                     <label for="author" class="form-label">लेखक</label>
-                    <input type="text" class="form-control" id="author" placeholder="Author">
+                    <input type="text" class="form-control" name="author" id="author" placeholder="Author">
                   </div>
                   <div class="mb-3">
                     <label for="publisher" class="form-label">प्रकाशक</label>
-                    <input type="text" class="form-control" id="publisher" placeholder="Publisher">
+                    <input type="text" class="form-control" name="publisher" id="publisher" placeholder="Publisher">
                   </div>
 
                   <div class="mb-3">
                     <label for="state" class="form-label">स्थिति</label>
-                    <select class="form-select" id="state">
+                    <select class="form-select" name="state" id="state">
                       <option>Select State</option>
                       <option>Published</option>
                       <option>Unpublished</option>
@@ -109,10 +112,8 @@
                   </div>
 
                   <div class="mb-3">
-                    <label class="form-label">विवरण सामग्री</label>
-                    <div class="rich-text-editor border p-2">
-                      <p>This is an interactive text editor that allows you to format text styles like bold, italics, underline, font color and size, alignment, etc.right here.</p>
-                    </div>
+                    <label for="article-content" class="form-label">विवरण सामग्री</label>
+                    <textarea name="content" id="editor" class="ckeditor rich-text-editor border p-2"></textarea>
                   </div>
 
                   <div class="text-end mt-4">
@@ -191,6 +192,8 @@
         </div>
     </div>
     </div>
+@endsection
+@push('scripts')
     <script>
         document.querySelectorAll(".tag-pill").forEach(tag => {
         tag.addEventListener("click", function () {
@@ -199,10 +202,22 @@
             });
         });
     </script>
-@endsection
-@push('scripts')
-
     <script src="assets/vendor/libs/select2/js/select2.full.min.js"></script>
     <script src="assets/vendor/libs/select2/js/select2-custom.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('#editor'),
+        {
+            ckfinder:
+            {
+                uploadUrl:"{{route('news.upload',['_token'=>csrf_token()])}}",
+            }
+        })
+        .catch(error=>{
+            console.error(error);
+        });
+    </script>
+
 
 @endpush
