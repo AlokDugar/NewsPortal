@@ -24,7 +24,7 @@
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">News Types Table</h4>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTypeModal">
-                                Create Type
+                                <i class="fas fa-plus"></i> News Type
                             </button>
                         </div>
                         <div class="modal fade" id="createTypeModal" tabindex="-1" aria-labelledby="createTypeModalLabel" aria-hidden="true">

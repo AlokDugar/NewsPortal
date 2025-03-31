@@ -19,15 +19,10 @@
             <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title link-nav" href="{{url('/')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
             <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="menu"></i><span>News</span></a>
                 <ul class="sidebar-submenu">
+                    <li><a href="{{route('news.index')}}">Details</a></li>
+                    <li><a href="{{route('news.showDashboard')}}">Dashboard</a></li>
                   <li><a href="{{route('categories.index')}}">Categories</a></li>
                   <li><a href="{{route('types.index')}}">Types</a></li>
-                  <li><a href="{{route('news.showDashboard')}}">Dashboard</a></li>
-                  <li><a class="submenu-title" href="javascript:void(0)">Details<span class="sub-arrow"><i class="fa fa-angle-right"></i></span></a>
-                        <ul class="nav-sub-childmenu submenu-content">
-                            <li><a href="{{route('news.index')}}">Table</a></li>
-                            <li><a href="{{route('news.create')}}">Create</a></li>
-                            <li><a href="{{route('news.index')}}">Edit</a></li>
-                        </ul>
                 </ul>
             </li>
             <li class="sidebar-list"><i class="fas fa-thumbtack"></i><a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="menu"></i><span>Advertisements</span></a>

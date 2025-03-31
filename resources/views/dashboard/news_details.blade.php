@@ -22,8 +22,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header pb-0">
+                        <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">News Details Table</h4>
+                            <form action="{{ route('news.create') }}" method="GET">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> News Article
+                                </button>
+                            </form>
                         </div>
                         <div class="card-body">
                             <div class="dt-ext table-responsive theme-scrollbar">
@@ -38,8 +43,7 @@
                                             <th>Publisher</th>
                                             <th>State</th>
                                             <th>Content</th>
-                                            <th>Created At</th>
-                                            <th>Updated At</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,10 +58,49 @@
                                                     {{ implode(', ', $news->categories->pluck('name')->toArray()) }}
                                                 </td>
                                                 <td>{{ $news->author }}</td>
-                                                <td>{{ $news->state }}</td>
-                                                <td>{{ Str::limit($news->content, 50) }}</td> <!-- Limiting content to 50 characters -->
-                                                <td>{{ $news->created_at->format('d M Y H:i') }}</td>
-                                                <td>{{ $news->updated_at->format('d M Y H:i') }}</td>
+                                                <td>{{ $news->publisher }}</td>
+                                                <td>
+                                                    <form action="{{ route('news.updateStatus') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="news_id" value="{{$news->id}}">
+                                                        <a type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="badge status-info
+                                                                @if($news->state == 'Published')
+                                                                    bg-success
+                                                                @else
+                                                                    bg-danger
+                                                                @endif"
+                                                                data-news-id="{{$news->id}}"
+                                                                data-current-status="{{$news->state}}">
+                                                                {{$news->state}}
+                                                            </span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end status-dropdown-menu">
+                                                            <button type="submit" class="dropdown-item" name="status" value="Published">
+                                                                <i class="fas fa-check-circle status-icon active-icon" style="color: rgb(85, 255, 0);"></i> Published
+                                                            </button>
+                                                            <button type="submit" class="dropdown-item" name="status" value="Unpublished">
+                                                                <i class="fas fa-times-circle status-icon inactive-icon" style="color: rgb(255, 0, 0);"></i> Unpublished
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                                <td>{{ Str::limit($news->content, 50) }}</td>
+                                                <td>
+                                                    <ul class="action">
+                                                        <li class="edit">
+                                                            <a href="{{ route('news.edit', ['id' => $news->id]) }}">
+                                                                <i data-feather="edit"></i>
+                                                            </a>
+
+                                                        </li>
+                                                        <li class="delete">
+                                                            <a href="javascript:void(0);" class="delete-btn" data-id="{{ $news->id }}">
+                                                                <i data-feather="trash-2"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -98,7 +141,7 @@
 <script>
     document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', function(e) {
-            const categoryId = e.currentTarget.getAttribute('data-id');
+            const newsId = e.currentTarget.getAttribute('data-id');
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -119,7 +162,7 @@
                         if (result.isConfirmed) {
                             const form = document.createElement('form');
                             form.method = 'POST';
-                            form.action = '/categories/' + categoryId;
+                            form.action = '/news/' + newsId;
 
                             const methodField = document.createElement('input');
                             methodField.type = 'hidden';

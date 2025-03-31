@@ -46,7 +46,7 @@ class NewsController extends Controller
                 'type_id' => 'required|exists:types,id',
                 'author' => 'required|string|max:255',
                 'publisher' => 'required|string|max:255',
-                'state' => 'required|string|max:100',
+                'state' => 'required|string|in:Published,Unpublished',
                 'content' => 'required|string',
             ]);
             Log::info('Request validated successfully.', ['validated_data' => $data]);
@@ -55,7 +55,6 @@ class NewsController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
-        // Handle file upload if present
         if ($request->hasFile('image_path')) {
             try {
                 $data['image_path'] = $request->file('image_path')->store('news_images', 'public');
@@ -68,7 +67,6 @@ class NewsController extends Controller
             Log::info('No image uploaded.');
         }
 
-        // Create the news article
         try {
             $news = NewsDetails::create($data);
             Log::info('News article created successfully.', ['news_id' => $news->id]);
@@ -77,7 +75,6 @@ class NewsController extends Controller
             return redirect()->back()->with('error', 'Failed to create news article.');
         }
 
-        // Sync the categories with the news article
         try {
             $news->categories()->sync($request->input('category_ids', []));
             Log::info('Categories synced successfully.', ['categories' => $request->input('category_ids')]);
@@ -86,9 +83,8 @@ class NewsController extends Controller
             return redirect()->back()->with('error', 'Failed to sync categories.');
         }
 
-        // Return a success response
         Log::info('News article created successfully. Redirecting to previous page.');
-        return redirect()->back()->with('success', 'News article created successfully.');
+        return redirect()->route('news.index')->with('success', 'News article created successfully.');
     }
 
     /**
@@ -102,9 +98,13 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->query('id');
+        $cats=NewsCategory::all();
+        $types=Type::all();
+        $newsDetails=NewsDetails::findOrFail($id);
+        return view('dashboard.news_edit',compact('newsDetails','cats', 'types'));
     }
 
     /**
@@ -120,7 +120,10 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $news = NewsDetails::findOrFail($id);
+        $news->delete();
+
+        return redirect()->back()->with('success', 'Article deleted successfully!');
     }
 
     public function upload(Request $request)
@@ -144,6 +147,26 @@ class NewsController extends Controller
         $unpublishedCount = NewsDetails::where('state', 'Unpublished')->count();
 
         return view('dashboard.NewsDashboard', compact('totalCount', 'publishedCount', 'unpublishedCount'));
+    }
+
+    public function updateStatus(Request $request)
+    {
+        try {
+
+            $request->validate([
+                'news_id' => 'required|exists:news_details,id',
+                'status' => 'required|in:Published,Unpublished',
+            ]);
+
+            $news = NewsDetails::find($request->news_id);
+
+            $news->state = $request->status;
+            $news->save();
+
+            return redirect()->back()->with('success', 'Status updated successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while updating the status.');
+        }
     }
 }
 

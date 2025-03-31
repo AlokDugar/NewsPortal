@@ -24,7 +24,7 @@
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">Advertisement Types Table</h4>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
-                                Create Type
+                                <i class="fas fa-plus"></i> AD Type
                             </button>
                         </div>
                         <div class="modal fade" id="createCategoryModal" tabindex="-1" aria-labelledby="createCategoryModalLabel" aria-hidden="true">

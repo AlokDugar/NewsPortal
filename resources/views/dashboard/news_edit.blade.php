@@ -85,14 +85,13 @@
                     <div class="tag-container" id="types-container">
                         @foreach ($types as $type)
                             <span class="tag-pill">
-                                <input type="radio" name="type_id" value="{{ $type->id }}" id="type-{{ $type->id }}" class="form-check-input visually-hidden">
-                                <label for="type-{{ $type->id }}" class="form-check-label">{{ $type->name }}</label>
+                                {{$type->name}}
+                                <input type="hidden" name="type_id" value="{{$type->id}}">
                             </span>
                         @endforeach
                     </div>
                     <button type="button" id="add-type" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createTypeModal">Add Type</button>
                   </div>
-
 
                   <div class="mb-3">
                     <label for="author" class="form-label">लेखक</label>
@@ -107,8 +106,8 @@
                     <label for="state" class="form-label">स्थिति</label>
                     <select class="form-select" name="state" id="state">
                       <option>Select State</option>
-                      <option value="Published">Published</option>
-                      <option value="Unpublished">Unpublished</option>
+                      <option>Published</option>
+                      <option>Unpublished</option>
                     </select>
                   </div>
 
@@ -119,7 +118,7 @@
 
                   <div class="text-end mt-4">
                     <button type="button" class="btn btn-secondary me-2">Cancel</button>
-                    <button type="submit" class="btn btn-primary">नयाँ पत्रकारिता</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                   </div>
                 </form>
               </div>

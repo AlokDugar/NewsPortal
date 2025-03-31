@@ -51,8 +51,10 @@ Route::post('/adminlogout', function () {
 
 Route::post('/categories-update-status',[NewsCategoryController::class,'updateStatus'])->name('categories.updateStatus')->middleware(AdminAuth::class);
 Route::post('/ads-update-status',[AdvertisementController::class,'updateStatus'])->name('ads.updateStatus')->middleware(AdminAuth::class);
+Route::post('/news-update-status',[NewsController::class,'updateStatus'])->name('news.updateStatus')->middleware(AdminAuth::class);
 
 Route::post('/news/upload-image', [NewsController::class,'upload'])->name('news.upload');
 Route::get('/news-dashboard', [NewsController::class,'showDashboard'])->name('news.showDashboard');
 Route::get('/news-create', [NewsController::class,'create'])->name('news.create');
+Route::get('/news-edit', [NewsController::class,'edit'])->name('news.edit');
 

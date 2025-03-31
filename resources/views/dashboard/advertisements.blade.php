@@ -28,7 +28,7 @@
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">Advertisements Table</h4>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAdModal">
-                                Create Advertisement
+                                <i class="fas fa-plus"></i> Advertisement
                             </button>
                         </div>
                         <div class="modal fade" id="createAdModal" tabindex="-1" aria-labelledby="createAdModalLabel" aria-hidden="true">
