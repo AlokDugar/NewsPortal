@@ -23,6 +23,7 @@
     }
 
 
+
 </style>
 @endpush
 @section('content')
@@ -50,22 +51,23 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-body">
-                <form action="{{route('news.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('news.update', $newsDetails->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                   <div class="mb-3">
                     <label for="title" class="form-label">शीर्षक *</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="Start off your News by writing an engaging title">
+                    <input type="text" class="form-control" name="title" id="title" value="{{ $newsDetails->title}}" placeholder="Start off your News by writing an engaging title">
                   </div>
 
                   <div class="mb-3">
                     <label class="form-label">तस्वीर *</label>
                     <div class="d-lg-flex d-md-flex d-sm-flex align-items-center">
                         <div class="p-image">
-                            <img class="img-100 square profile-pic" alt="" src="">
+                            <img class="img-100 square profile-pic" src="{{ $newsDetails->image_path ? asset('storage/news_images/' . basename($newsDetails->image_path)) : ''}}" alt="News Image">
                             <div class="icon-wrapper">
                                 <i class="fas fa-plus" onclick="document.getElementById('profile_image').click();"></i>
                                 <input class="file-upload" id="profile_image" type="file" name="image_path" accept="image/*" style="display:none;" />
-                          </div>
+                            </div>
                         </div>
                     </div>
                   </div>
@@ -74,7 +76,10 @@
                     <label class="form-label">वर्गीकरण *</label>
                     <select class="js-example-basic-multiple col-sm-12" multiple="multiple" name="category_ids[]">
                         @foreach ($cats as $cat)
-                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            <option value="{{ $cat->id }}"
+                                    {{ in_array($cat->id, old('category_ids', $newsDetails->categories->pluck('id')->toArray())) ? 'selected' : '' }}>
+                                {{ $cat->name }}
+                            </option>
                         @endforeach
                     </select>
                     <button type="button" id="add-category" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createCategoryModal">Add Category</button>
@@ -84,40 +89,44 @@
                     <label class="form-label">प्रकार *</label>
                     <div class="tag-container" id="types-container">
                         @foreach ($types as $type)
-                            <span class="tag-pill">
-                                {{$type->name}}
-                                <input type="hidden" name="type_id" value="{{$type->id}}">
+                            <span class="tag-pill {{ $newsDetails->type_id == $type->id ? 'active' : '' }}"
+                                  data-type-id="{{ $type->id }}">
+                                <input type="radio" name="type_id" value="{{ $type->id }}" id="type-{{ $type->id }}" class="form-check-input visually-hidden">
+                                <label for="type-{{ $type->id }}" class="form-check-label">{{ $type->name }}</label>
                             </span>
                         @endforeach
                     </div>
                     <button type="button" id="add-type" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createTypeModal">Add Type</button>
                   </div>
 
+
                   <div class="mb-3">
                     <label for="author" class="form-label">लेखक</label>
-                    <input type="text" class="form-control" name="author" id="author" placeholder="Author">
+                    <input type="text" class="form-control" name="author" id="author" value="{{$newsDetails->author}}" placeholder="Author">
                   </div>
                   <div class="mb-3">
                     <label for="publisher" class="form-label">प्रकाशक</label>
-                    <input type="text" class="form-control" name="publisher" id="publisher" placeholder="Publisher">
+                    <input type="text" class="form-control" name="publisher" id="publisher" value="{{$newsDetails->author}}" placeholder="Publisher">
                   </div>
 
                   <div class="mb-3">
                     <label for="state" class="form-label">स्थिति</label>
                     <select class="form-select" name="state" id="state">
                       <option>Select State</option>
-                      <option>Published</option>
-                      <option>Unpublished</option>
+                      <option value="Published" {{$newsDetails->state=="Published"?'selected':''}}>Published</option>
+                      <option value="Unpublished" {{$newsDetails->state=="Unpublished"?'selected':''}}>Unpublished</option>
                     </select>
                   </div>
 
                   <div class="mb-3">
                     <label for="article-content" class="form-label">विवरण सामग्री</label>
-                    <textarea name="content" id="editor" class="ckeditor rich-text-editor border p-2"></textarea>
+                    <textarea name="content" id="editor" class="ckeditor rich-text-editor border p-2">{{$newsDetails->content}}</textarea>
                   </div>
 
                   <div class="text-end mt-4">
-                    <button type="button" class="btn btn-secondary me-2">Cancel</button>
+                    <button type="button" class="btn btn-secondary me-2" onclick="window.location='{{ route('news.index') }}'">
+                        Cancel
+                    </button>
                     <button type="submit" class="btn btn-primary">Update</button>
                   </div>
                 </form>

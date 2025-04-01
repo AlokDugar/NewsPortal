@@ -33,48 +33,6 @@
             <li class="drkthm">
               <div class="mode"><i class="fas fa-moon"></i></div>
             </li>
-            <li class="onhover-dropdown dropdown">
-                <div class="notification-box"><i data-feather="bell"></i><span class="badge badge-primary counter">14</span></div>
-              <ul class="notification-dropdown show-div dropdown-menu">
-                <li><i data-feather="bell"> </i>
-                  <h6 class="f-18 mb-0">Notitications</h6>
-                  <a href="javascript:void(0);" class="text-end text-dark">Mark all read</a>
-                </li>
-                <li>
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0"><i data-feather="truck"></i></div>
-                    <div class="flex-grow-1">
-                      <p><a href="order-history.html">Delivery processing </a><span class="pull-right">6 hr</span></p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0"><i data-feather="shopping-cart"></i></div>
-                    <div class="flex-grow-1">
-                      <p><a href="cart.html">Order Complete</a><span class="pull-right">3 hr</span></p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0"><i data-feather="file-text"></i></div>
-                    <div class="flex-grow-1">
-                      <p><a href="invoice-template.html">Tickets Generated</a><span class="pull-right">1 hr</span></p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0"><i data-feather="send"></i></div>
-                    <div class="flex-grow-1">
-                      <p><a href="email_inbox.html">Delivery Complete</a><span class="pull-right">45 min</span></p>
-                    </div>
-                  </div>
-                </li>
-                <li><a class="btn btn-primary" href="javascript:void(0)">Check all notification</a></li>
-              </ul>
-            </li>
             <li class="maximize"><a href="#!" onclick="javascript:toggleFullScreen()">
               <i data-feather="maximize-2"></i></a>
             </li>

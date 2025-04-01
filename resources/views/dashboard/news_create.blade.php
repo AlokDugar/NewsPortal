@@ -118,7 +118,9 @@
                   </div>
 
                   <div class="text-end mt-4">
-                    <button type="button" class="btn btn-secondary me-2">Cancel</button>
+                    <button type="button" class="btn btn-secondary me-2" onclick="window.location='{{ route('news.index') }}'">
+                        Cancel
+                    </button>
                     <button type="submit" class="btn btn-primary">नयाँ पत्रकारिता</button>
                   </div>
                 </form>

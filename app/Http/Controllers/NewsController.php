@@ -7,6 +7,7 @@ use App\Models\NewsDetails;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -110,10 +111,72 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        Log::info('Update method started.', ['news_id' => $id, 'request_data' => $request->all()]);
+
+        // Find the existing news article
+        $news = NewsDetails::findOrFail($id);
+
+        // Validate the incoming request data
+        try {
+            $data = $request->validate([
+                'title' => 'required|string|max:255',
+                'image_path' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+                'category_ids' => 'required|array',
+                'category_ids.*' => 'exists:news_categories,id',
+                'type_id' => 'required|exists:types,id',
+                'author' => 'required|string|max:255',
+                'publisher' => 'required|string|max:255',
+                'state' => 'required|string|in:Published,Unpublished',
+                'content' => 'required|string',
+            ]);
+            Log::info('Request validated successfully.', ['validated_data' => $data]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation failed.', ['error' => $e->errors()]);
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
+
+        // Handle image upload if a new file is provided
+        if ($request->hasFile('image_path')) {
+            try {
+                // Delete the old image if it exists
+                if ($news->image_path) {
+                    Storage::disk('public')->delete($news->image_path);
+                }
+                // Store the new image
+                $data['image_path'] = $request->file('image_path')->store('news_images', 'public');
+                Log::info('Image updated successfully.', ['image_path' => $data['image_path']]);
+            } catch (\Exception $e) {
+                Log::error('Image upload failed.', ['error' => $e->getMessage()]);
+                return redirect()->back()->with('error', 'Failed to upload image.');
+            }
+        } else {
+            $data['image_path'] = $news->image_path; // Keep old image if no new one is uploaded
+        }
+
+        // Update the news article
+        try {
+            $news->update($data);
+            Log::info('News article updated successfully.', ['news_id' => $news->id]);
+        } catch (\Exception $e) {
+            Log::error('News article update failed.', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Failed to update news article.');
+        }
+
+        // Sync categories
+        try {
+            $news->categories()->sync($request->input('category_ids', []));
+            Log::info('Categories synced successfully.', ['categories' => $request->input('category_ids')]);
+        } catch (\Exception $e) {
+            Log::error('Category syncing failed.', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Failed to sync categories.');
+        }
+
+        Log::info('News article updated successfully. Redirecting to previous page.');
+        return redirect()->route('news.index')->with('success', 'News article updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
