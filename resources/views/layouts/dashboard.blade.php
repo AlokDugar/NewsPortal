@@ -24,6 +24,7 @@
         <!-- Custom css-->
         <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
         <!-- <link rel="stylesheet" type="text/css" href="assets/css/responsive.css"> -->
+
         @stack('css')
 
 
