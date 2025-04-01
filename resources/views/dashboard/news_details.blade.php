@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url('/') }}">NewsPortal</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">NewsPortal</a></li>
                         <li class="breadcrumb-item active">News</li>
                         <li class="breadcrumb-item active">Details</li>
                     </ol>

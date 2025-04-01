@@ -33,13 +33,6 @@
             <div class="col-sm-6">
                 <h3>Create News Article</h3>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">NewsPortal</a></li>
-                <li class="breadcrumb-item">News</li>
-                <li class="breadcrumb-item active"> News Details</li>
-                </ol>
-            </div>
             </div>
         </div>
         </div>
