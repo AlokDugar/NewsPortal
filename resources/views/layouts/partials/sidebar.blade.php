@@ -16,12 +16,11 @@
                         <h6>Pinned</h6>
                     </li>
                     <hr>
-                    <li class="sidebar-list"> <a class="sidebar-link sidebar-title link-nav" href="{{url('/')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
+                    <li class="sidebar-list"> <a class="sidebar-link sidebar-title link-nav" href="{{route('home')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="file-text"></i><span>News</span></a>
                         <ul class="sidebar-submenu">
                             <li><a href="{{route('news.index')}}">Details</a></li>
-                            <li><a href="{{route('news.showDashboard')}}">Dashboard</a></li>
                             <li><a href="{{route('categories.index')}}">Categories</a></li>
                             <li><a href="{{route('types.index')}}">Types</a></li>
                         </ul>

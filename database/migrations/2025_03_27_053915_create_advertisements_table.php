@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('details');
             $table->string('status');
             $table->string('url');
+            $table->integer('clicks')->default(0);
             $table->timestamps();
         });
     }

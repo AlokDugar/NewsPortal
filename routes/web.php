@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminResetController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AdvertisementTypeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\TypeController;
@@ -13,9 +14,7 @@ use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
-})->middleware(AdminAuth::class);
+Route::get('/dashboard',[HomeController::class,'index'])->name('home')->middleware(AdminAuth::class);
 
 Route::get('/profile', function () {
     return view('profile');
@@ -54,7 +53,6 @@ Route::post('/ads-update-status',[AdvertisementController::class,'updateStatus']
 Route::post('/news-update-status',[NewsController::class,'updateStatus'])->name('news.updateStatus')->middleware(AdminAuth::class);
 
 Route::post('/news/upload-image', [NewsController::class,'upload'])->name('news.upload');
-Route::get('/news-dashboard', [NewsController::class,'showDashboard'])->name('news.showDashboard');
 Route::get('/news-create', [NewsController::class,'create'])->name('news.create');
 Route::get('/news-edit', [NewsController::class,'edit'])->name('news.edit');
 

@@ -30,6 +30,6 @@ class AdminLoginController extends Controller
         }
         Auth::guard('admin')->login($admin);
 
-        return redirect()->intended('/');
+        return redirect()->intended('/dashboard');
     }
 }

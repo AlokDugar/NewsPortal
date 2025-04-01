@@ -204,14 +204,6 @@ class NewsController extends Controller
         }
     }
 
-    public function showDashboard(){
-        $totalCount = NewsDetails::count();
-        $publishedCount = NewsDetails::where('state', 'Published')->count();
-        $unpublishedCount = NewsDetails::where('state', 'Unpublished')->count();
-
-        return view('dashboard.NewsDashboard', compact('totalCount', 'publishedCount', 'unpublishedCount'));
-    }
-
     public function updateStatus(Request $request)
     {
         try {
