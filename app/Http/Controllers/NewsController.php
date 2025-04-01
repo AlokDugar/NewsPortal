@@ -115,10 +115,7 @@ class NewsController extends Controller
     {
         Log::info('Update method started.', ['news_id' => $id, 'request_data' => $request->all()]);
 
-        // Find the existing news article
         $news = NewsDetails::findOrFail($id);
-
-        // Validate the incoming request data
         try {
             $data = $request->validate([
                 'title' => 'required|string|max:255',
@@ -137,14 +134,11 @@ class NewsController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
-        // Handle image upload if a new file is provided
         if ($request->hasFile('image_path')) {
             try {
-                // Delete the old image if it exists
                 if ($news->image_path) {
                     Storage::disk('public')->delete($news->image_path);
                 }
-                // Store the new image
                 $data['image_path'] = $request->file('image_path')->store('news_images', 'public');
                 Log::info('Image updated successfully.', ['image_path' => $data['image_path']]);
             } catch (\Exception $e) {
@@ -152,10 +146,9 @@ class NewsController extends Controller
                 return redirect()->back()->with('error', 'Failed to upload image.');
             }
         } else {
-            $data['image_path'] = $news->image_path; // Keep old image if no new one is uploaded
+            $data['image_path'] = $news->image_path;
         }
 
-        // Update the news article
         try {
             $news->update($data);
             Log::info('News article updated successfully.', ['news_id' => $news->id]);
@@ -164,7 +157,6 @@ class NewsController extends Controller
             return redirect()->back()->with('error', 'Failed to update news article.');
         }
 
-        // Sync categories
         try {
             $news->categories()->sync($request->input('category_ids', []));
             Log::info('Categories synced successfully.', ['categories' => $request->input('category_ids')]);

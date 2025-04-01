@@ -81,15 +81,17 @@
                     <label class="form-label">प्रकार *</label>
                     <div class="tag-container" id="types-container">
                         @foreach ($types as $type)
-                            <span class="tag-pill {{ $newsDetails->type_id == $type->id ? 'active' : '' }}"
+                            <span class="tag-pill {{ old('type_id', $newsDetails->type_id) == $type->id ? 'active' : '' }}"
                                   data-type-id="{{ $type->id }}">
-                                <input type="radio" name="type_id" value="{{ $type->id }}" id="type-{{ $type->id }}" class="form-check-input visually-hidden">
+                                <input type="radio" name="type_id" value="{{ $type->id }}" id="type-{{ $type->id }}" class="form-check-input visually-hidden"
+                                {{ old('type_id', $newsDetails->type_id) == $type->id ? 'checked' : '' }}>
                                 <label for="type-{{ $type->id }}" class="form-check-label">{{ $type->name }}</label>
                             </span>
                         @endforeach
                     </div>
                     <button type="button" id="add-type" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createTypeModal">Add Type</button>
                   </div>
+
 
 
                   <div class="mb-3">

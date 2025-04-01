@@ -161,7 +161,7 @@
                                     @foreach ($recentArticles as $article)
                                         <tr>
                                             <td>
-                                                {{ $article->type->allow_delete == 0 ? explode(' ', $article->type->name)[0] . ':' . $article->title : $article->title }}
+                                                {{ $article->type->allow_delete == 0 ? explode(' ', $article->type->name)[0] . ': ' . $article->title : $article->title }}
                                             </td>
                                             <td>
                                                 {{ implode(', ', $article->categories->pluck('name')->toArray()) }}
