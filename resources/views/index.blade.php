@@ -168,7 +168,7 @@
                                             </td>
                                             <td>{{ $article->type->name }}</td>
                                             <td>{{ $article->author }}</td>
-                                            <td>{{ $article->created_at->format('M d, Y h:i A') }}</td>
+                                            <td>{{ $article->created_at->format('M d, Y') }}</td>
                                             <td>
                                                 <ul class="action">
                                                     <li class="edit">

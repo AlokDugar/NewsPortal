@@ -56,6 +56,7 @@
                                 <table class="display keytable">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Type</th>
                                             <th>Action</th>
                                         </tr>
@@ -63,6 +64,7 @@
                                     <tbody>
                                         @foreach ($adTypes as $adType)
                                             <tr>
+                                                <td>{{$adType->id}}</td>
                                                 <td>{{$adType->type}}</td>
                                                 <td>
                                                     <ul class="action">

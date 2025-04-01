@@ -35,6 +35,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Title</th>
                                             <th>Image</th>
                                             <th>Type</th>
@@ -49,6 +50,7 @@
                                     <tbody>
                                         @foreach ($newsDetails as $news)
                                             <tr>
+                                                <td>{{ $news->id }}</td>
                                                 <td>{{ $news->title }}</td>
                                                 <td>
                                                     <img src="{{ asset('storage/' . $news->image_path) }}" alt="News Image" width="100" height="100">

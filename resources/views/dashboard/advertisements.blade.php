@@ -89,6 +89,7 @@
                                 <table class="display keytable">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Advertisement Type</th>
                                             <th>Details</th>
                                             <th>URL</th>
@@ -99,6 +100,7 @@
                                     <tbody>
                                         @foreach ($ads as $ad)
                                             <tr>
+                                                <td>{{$ad->id}}</td>
                                                 <td>{{ $ad->AdvertisementType->type }}</td>
                                                 <td>
                                                     @if($ad->AdvertisementType->type === 'Video')

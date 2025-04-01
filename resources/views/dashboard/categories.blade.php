@@ -70,6 +70,7 @@
                                 <table class="display keytable">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Category Name</th>
                                             <th>URL</th>
                                             <th>Status</th>
@@ -79,6 +80,7 @@
                                     <tbody>
                                         @foreach ($cats as $cat)
                                             <tr>
+                                                <td>{{$cat->id}}</td>
                                                 <td>{{$cat->name}}</td>
                                                 <td>{{$cat->url}}</td>
                                                 <td>
