@@ -62,39 +62,5 @@ class DatabaseSeeder extends Seeder
             ['type' => 'Video'],
         ]);
 
-        DB::table('advertisements')->insert([
-            [
-                'type_id' => 1,
-                'details' => 'ads/banner1.jpg',
-                'status' => 'Active',
-                'url' => 'https://example.com/banner1',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'type_id' => 2,
-                'details' => 'ads/sidebar1.jpg',
-                'status' => 'Active',
-                'url' => 'https://example.com/sidebar1',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'type_id' => 3,
-                'details' => 'ads/popup1.jpg',
-                'status' => 'Inactive',
-                'url' => 'https://example.com/popup1',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'type_id' => 4,
-                'details' => 'ads/video1.mp4',
-                'status' => 'Active',
-                'url' => 'https://example.com/video1',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
     }
 }
