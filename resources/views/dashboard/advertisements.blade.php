@@ -178,7 +178,7 @@
                                                                         </select>
                                                                     </div>
 
-                                                                    <!-- Advertisement Image (Upload or URL) -->
+                                                                   <!-- Advertisement Image (Upload or URL) -->
                                                                     <div class="mb-3">
                                                                         <label>Advertisement (Upload a file OR provide an URL)</label>
                                                                     </div>
@@ -195,7 +195,11 @@
 
                                                                     <div class="mb-3">
                                                                         <label for="details" class="form-label">Upload</label>
+                                                                        <!-- Display previously uploaded file name if any -->
                                                                         <input type="file" class="form-control" id="details" name="details" onchange="updateFileName(this)">
+                                                                        @if($ad->details)
+                                                                            <small class="text-muted">Current file: {{ basename($ad->details) }}</small>
+                                                                        @endif
                                                                     </div>
 
                                                                     <!-- Image URL (Optional) -->
@@ -205,6 +209,7 @@
                                                                             placeholder="http://example.com/image.jpg"
                                                                             value="{{ old('image_url', (filter_var($ad->details, FILTER_VALIDATE_URL)) ? $ad->details : '') }}">
                                                                     </div>
+
 
                                                                     <!-- URL to Redirect -->
                                                                     <div class="mb-3">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Advertisement;
 use App\Models\AdvertisementType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AdvertisementController extends Controller
 {
@@ -84,25 +85,26 @@ class AdvertisementController extends Controller
     {
         $request->validate([
             'type_id' => 'required|string',
-            'details'   => 'nullable|mimes:jpeg,png,jpg,gif,mp4,mov,avi',
+            'details' => 'nullable|mimes:jpeg,png,jpg,gif,mp4,mov,avi',
             'image_url' => 'nullable|url',
             'url' => 'required|string',
             'status' => 'required|string|in:Active,Inactive',
         ]);
 
-        $image_path=null;
+        $image_path = null;
+
         if ($request->hasFile('details')) {
-            $imagePath = $request->file('details')->store('advertisements', 'public');
+            $image_path = $request->file('details')->store('advertisements', 'public');
         } elseif ($request->filled('image_url')) {
-            $imagePath = $request->image_url;
+            $image_path = $request->image_url;
+        } else {
+            $ad = Advertisement::find($id);
+            $image_path = $ad->details;
         }
 
-        if (!$imagePath) {
-            return redirect()->back()->with('error', 'Please provide an image file or a valid image URL.');
-        }
         $ad = Advertisement::find($id);
         $ad->type_id = $request->type_id;
-        $ad->details = $imagePath;
+        $ad->details = $image_path;
         $ad->url = $request->url;
         $ad->status = $request->status;
         $ad->save();
@@ -123,15 +125,34 @@ class AdvertisementController extends Controller
     }
     public function updateStatus(Request $request)
     {
-        $request->validate([
-            'ad_id' => 'required|exists:news_categories,id',
-            'status' => 'required|in:Active,Inactive',
-        ]);
+        Log::info('Updating advertisement status', ['request' => $request->all()]);
 
-        $ad = Advertisement::find($request->ad_id);
-        $ad->status = $request->status;
-        $ad->save();
+        try {
+            $request->validate([
+                'ad_id' => 'required|exists:advertisements,id',
+                'status' => 'required|in:Active,Inactive',
+            ]);
 
-        return redirect()->back()->with('success', 'Status updated successfully!');
+            Log::info('Request validated successfully.');
+            $ad = Advertisement::find($request->ad_id);
+
+            if (!$ad) {
+                Log::error('Advertisement not found', ['ad_id' => $request->ad_id]);
+                return redirect()->back()->with('error', 'Advertisement not found.');
+            }
+
+            Log::info('Advertisement found, updating status.', ['ad_id' => $ad->id]);
+
+            $ad->status = $request->status;
+            $ad->save();
+
+            Log::info('Status updated successfully.', ['ad_id' => $ad->id, 'status' => $request->status]);
+
+            return redirect()->back()->with('success', 'Status updated successfully!');
+        } catch (\Exception $e) {
+            Log::error('Error updating status', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+
+            return redirect()->back()->with('error', 'An error occurred while updating the status.');
+        }
     }
 }
