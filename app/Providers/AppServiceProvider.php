@@ -30,5 +30,12 @@ class AppServiceProvider extends ServiceProvider
             $dash_logoPath = 'dashboard_logo/default_logo.png';
         }
         Config::set('settings.dashboard_logo', "storage/{$dash_logoPath}");
+
+        $faviconPath = $settings->favicon;
+
+        if (!Storage::disk('public')->exists($faviconPath)) {
+            $faviconPath = 'favicon/default_favicon.png';
+        }
+        Config::set('settings.favicon', "storage/{$faviconPath}");
     }
 }

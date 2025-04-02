@@ -10,9 +10,9 @@
         <meta name="" content="">
         <meta name="author" content="pixelstrap">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        
-        <link rel="icon" href="{{ asset('storage/' . ($settings->favicon ?? 'default-favicon.ico')) }}" type="image/x-icon">
-        <link rel="shortcut icon" href="" type="image/x-icon">
+
+        <link rel="icon" href="{{ asset(config('settings.favicon')) }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset(config('settings.favicon')) }}" type="image/x-icon">
         <link rel="preconnect" href="https://fonts.googleapis.com/">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 
