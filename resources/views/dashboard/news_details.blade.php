@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">NewsPortal</a></li>
+                        <li class="breadcrumb-item"><a href="{{url(' /')}}">NewsPortal</a></li>
                         <li class="breadcrumb-item active">News</li>
                         <li class="breadcrumb-item active">Details</li>
                     </ol>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="card-body">
                             <div class="dt-ext table-responsive theme-scrollbar">
-                                <table class="table table-bordered">
+                                <table class="display keytable">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -87,7 +87,7 @@
                                                         </div>
                                                     </form>
                                                 </td>
-                                                <td>{{ Str::limit($news->content, 50) }}</td>
+                                                <td>{!! Str::limit(strip_tags($news->content), 50) !!}</td>
                                                 <td>
                                                     <ul class="action">
                                                         <li class="edit">

@@ -21,7 +21,7 @@ class AdminResetPasswordMail extends Mailable
     public function build()
     {
         return $this->subject('Reset Your Password')
-                    ->view('auth.admin.resetmail')
+                    ->view('auth.resetmail')
                     ->with([
                         'resetUrl' => $this->resetUrl,
                     ]);

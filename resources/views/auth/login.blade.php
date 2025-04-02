@@ -42,20 +42,51 @@
                     <div>
                         <div><a class="logo" href="index.html"><img class="img-fluid for-light" src="assets/images/logo/logo.png" alt="looginpage"></a></div>
                         <div class="login-main">
-                            <form class="theme-form" action="#" method="POST">
+                            <!--
+                            @if(session('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            @if(session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            -->
+                            <form class="theme-form" action="{{url('/login')}}" method="POST">
                                 @csrf
-                                <h4 class="text-center">Reset Password</h4>
-                                <p class="text-center">Enter your email for Reset Link</p>
+                                <h4 class="text-center">Sign In</h4>
+                                <p class="text-center">Wanna access the Dashboard?</p>
                                 <div class="form-group">
                                     <label class="col-form-label">Email</label>
                                     <input class="form-control" name="email" type="email" required="" placeholder="demo@example.com">
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Password</label>
+                                    <div class="form-input position-relative">
+                                        <input class="form-control" type="password" name="password" required="" placeholder="*********">
+                                        <div class="show-hide"><span class="show"></span></div>
+                                    </div>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <button class="btn btn-primary btn-block w-100" type="submit">Send Email</button>
+                                    <div class="checkbox p-0">
+                                    <input id="checkbox1" type="checkbox">
+                                    <label class="text-muted" for="checkbox1">Remember password</label>
+                                    </div><a class="link" href="{{url('/forgot-password')}}">Forgot password?</a>
+                                    <div class="text-end mt-3">
+                                        <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
+                                    </div>
                                 </div>
-                                <p class="mt-4 mb-0 text-center">Remember Your Password?
-                                    <a class="ms-2" href="{{route('auth.adminLogin')}}">LogIn</a>
-                                </p>
                             </form>
                         </div>
                     </div>

@@ -78,7 +78,7 @@
                     <div class="tag-container" id="types-container">
                         @foreach ($types as $type)
                             <span class="tag-pill">
-                                <input type="radio" name="type_id" value="{{ $type->id }}" id="type-{{ $type->id }}" class="form-check-input visually-hidden">
+                                <input type="radio" name="type_id" value="{{ $type->id }}" id="type-{{ $type->id }}" class="form-check-input">
                                 <label for="type-{{ $type->id }}" class="form-check-label">{{ $type->name }}</label>
                             </span>
                         @endforeach

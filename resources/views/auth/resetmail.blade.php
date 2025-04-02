@@ -122,8 +122,7 @@
                                 <tr style="text-align: center">
                                     <td>
                                         <p style="color: #999; margin-bottom: 0">Pulchowk-03,Lalitpur</p>
-                                        <p style="color: #999; margin-bottom: 0">Don't Like These Emails?<a href="#" style="color: #ff5d22">Unsubscribe</a></p>
-                                        <p style="color: #999; margin-bottom: 0">Powered By Admin Dashboard</p>
+                                        <p style="color: #999; margin-bottom: 0">Powered By NewsPortal Dashboard</p>
                                     </td>
                                 </tr>
                             </tbody>

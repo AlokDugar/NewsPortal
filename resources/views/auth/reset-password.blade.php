@@ -47,14 +47,14 @@
                             <div>
                                 <div><a class="logo" href="index.html"><img class="img-fluid for-light" src="assets/images/logo/logo.png" alt="looginpage"></a></div>
                                 <div class="login-main">
-                                    <form class="theme-form" action="{{ route('password.adminUpdate') }}" method="POST">
+                                    <form class="theme-form" action="{{ route('password.store') }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="token" value="{{ $token }}">
+                                        <input type="hidden" name="token" value="{{$token}}">
                                         <h4>Reset Your Password</h4>
                                         <div class="form-group">
                                             <label class="col-form-label">Email</label>
                                             <div class="form-input position-relative">
-                                                <input class="form-control" type="email" name="email" required="" placeholder="demo@example.com">
+                                                <input class="form-control" type="email" name="email" required="" placeholder="demo@example.com" value="{{ request()->query('email') }}">
                                                 <div class="show-hide"><span class="show"></span></div>
                                             </div>
                                             @error('email') <small class="text-danger">{{ $message }}</small> @enderror
@@ -74,6 +74,7 @@
                                             <button class="btn btn-primary btn-block w-100 mt-3" type="submit">Done</button>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>

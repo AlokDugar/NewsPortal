@@ -38,22 +38,20 @@
             </li>
             <li class="profile-nav onhover-dropdown dropdown">
               <div class="account-user">
-                <img alt="" src="{{ Auth::guard('admin')->user()->image_path ? asset('storage/' . Auth::guard('admin')->user()->image_path) : 'assets/images/user/no-image.jpg' }}">
+                <img alt="" src="{{ Auth::user()->image_path ? asset('storage/' . Auth::user()->image_path) : 'assets/images/user/no-image.jpg' }}">
               </div>
               <ul class="profile-dropdown show-div dropdown-menu">
                 <li>
                   <div class="main-header-profile header-img">
                     <div class="main-img-user">
-                      <img alt="" src="{{ Auth::guard('admin')->user()->image_path ? asset('storage/' . Auth::guard('admin')->user()->image_path) : 'assets/images/user/no-image.jpg' }}">
+                      <img alt="" src="{{ Auth::user()->image_path ? asset('storage/' . Auth::user()->image_path) : 'assets/images/user/no-image.jpg' }}">
                     </div>
-                    <h6>{{Auth::guard('admin')->user()->name}}</h6>
+                    <h6>{{Auth::user()->name}}</h6>
                   </div>
                 </li>
-                <li><a href="{{route('profile')}}"><i data-feather="user"></i><span>Profile</span></a></li>
-                <li><a href="email_inbox.html"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                <li><a href="edit-profile.html"><i data-feather="settings"></i><span>Settings</span></a></li>
-                <li><a href="{{route('auth.adminLogout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
-                <form id="logout-form" action="{{ route('auth.adminLogout') }}" method="POST" style="display: none;">
+                <li><a href="{{route('profile.edit')}}"><i data-feather="user"></i><span>Profile</span></a></li>
+                <li><a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
+                <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </ul>
