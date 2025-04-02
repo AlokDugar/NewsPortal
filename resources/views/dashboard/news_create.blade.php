@@ -37,7 +37,6 @@
         </div>
         </div>
 
-      <!-- News Creation Form -->
       <div class="container-fluid px-0">
         <div class="row">
           <div class="col-sm-12">

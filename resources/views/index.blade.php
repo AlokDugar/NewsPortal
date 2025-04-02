@@ -17,7 +17,6 @@
             </div>
         </div>
 
-        <!-- Statistics Cards (3 rows) -->
         <div class="row">
             <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
@@ -71,7 +70,6 @@
             </div>
         </div>
 
-        <!-- Quick Actions (3 rows) -->
         <div class="row mb-4">
             <div class="col-md-4 col-sm-6 mb-3">
                 <a href="{{ route('news.create') ?? '#' }}" class="btn btn-primary btn-icon-split btn-lg">
@@ -94,7 +92,6 @@
 
         </div>
 
-        <!-- Content Row -->
         <div class="row">
             <div class="col-xl-4 col-lg-5">
                 <div class="card shadow mb-4">
@@ -134,7 +131,6 @@
             </div>
         </div>
 
-        <!-- Recent Articles Table -->
         <div class="row">
             <div class="col-12">
                 <div class="card shadow mb-4">
