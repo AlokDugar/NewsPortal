@@ -41,12 +41,12 @@ class NewsController extends Controller
         try {
             $data = $request->validate([
                 'title' => 'required|string|max:255',
-                'image_path' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+                'image_path' => 'required|image|mimes:jpg,png,jpeg|max:2048',
                 'category_ids' => 'required|array',
                 'category_ids.*' => 'exists:news_categories,id',
                 'type_id' => 'required|exists:types,id',
-                'author' => 'required|string|max:255',
-                'publisher' => 'required|string|max:255',
+                'author' => 'nullable|string|max:255',
+                'publisher' => 'nullable|string|max:255',
                 'state' => 'required|string|in:Published,Unpublished',
                 'content' => 'required|string',
             ]);
@@ -123,8 +123,8 @@ class NewsController extends Controller
                 'category_ids' => 'required|array',
                 'category_ids.*' => 'exists:news_categories,id',
                 'type_id' => 'required|exists:types,id',
-                'author' => 'required|string|max:255',
-                'publisher' => 'required|string|max:255',
+                'author' => 'nullable|string|max:255',
+                'publisher' => 'nullable|string|max:255',
                 'state' => 'required|string|in:Published,Unpublished',
                 'content' => 'required|string',
             ]);

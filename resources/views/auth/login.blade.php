@@ -40,7 +40,7 @@
             <div class="col-12 p-0">
                 <div class="login-card">
                     <div>
-                        <div><a class="logo" href="index.html"><img class="img-fluid for-light" src="assets/images/logo/logo.png" alt="looginpage"></a></div>
+                        <div><a class="logo" href="#"><img class="img-fluid for-light" src="{{ asset(config('settings.logo')) }}" alt="logo"></a></div>
                         <div class="login-main">
                             <!--
                             @if(session('success'))
@@ -79,10 +79,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <div class="checkbox p-0">
+                                    <!--<div class="checkbox p-0">
                                     <input id="checkbox1" type="checkbox">
                                     <label class="text-muted" for="checkbox1">Remember password</label>
-                                    </div><a class="link" href="{{url('/forgot-password')}}">Forgot password?</a>
+                                    </div>
+                                    <a class="link" href="{{url('/forgot-password')}}">Forgot password?</a>
+                                -->
                                     <div class="text-end mt-3">
                                         <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
                                     </div>

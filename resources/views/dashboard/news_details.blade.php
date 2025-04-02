@@ -4,6 +4,12 @@
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-between" role="alert">
+                    <span>{{ session('success') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-sm-6">
                     <h3>News Details</h3>
@@ -55,12 +61,12 @@
                                                 <td>
                                                     <img src="{{ asset('storage/' . $news->image_path) }}" alt="News Image" width="100" height="100">
                                                 </td>
-                                                <td>{{ $news->type->name ?? 'N/A' }}</td>
+                                                <td>{{ $news->type->name }}</td>
                                                 <td>
                                                     {{ implode(', ', $news->categories->pluck('name')->toArray()) }}
                                                 </td>
-                                                <td>{{ $news->author }}</td>
-                                                <td>{{ $news->publisher }}</td>
+                                                <td>{{ $news->author ?? 'N/A'}}</td>
+                                                <td>{{ $news->publisher ?? 'N/A'}}</td>
                                                 <td>
                                                     <form action="{{ route('news.updateStatus') }}" method="POST">
                                                         @csrf

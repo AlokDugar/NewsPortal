@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,19 +22,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'alokdugar4@gmail.com',
             'password'=>'123456'
         ]);
-        DB::table('admins')->insert([
-            'name' => 'Alok Dugar',
-            'email'=>'alokdugar4@gmail.com',
-            'password' => Hash::make('123456')
-        ]);
         DB::table('news_categories')->insert([
             [
-            'name' => 'Alok',
+            'name' => 'Test1',
             'status' => 'Active',
             'url'=>'https://www.google.co.uk/'
             ],
             [
-                'name'=> 'Test',
+                'name'=> 'Test2',
                 'status'=>'Inactive',
                 'url'=>'https://www.google.co.uk/'
             ]
@@ -51,7 +47,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'Alok',
+                'name' => 'Test',
                 'allow_delete' => true
             ],
         ]);
@@ -62,6 +58,10 @@ class DatabaseSeeder extends Seeder
             ['type' => 'Popup'],
             ['type' => 'Video'],
         ]);
-
+        Setting::create([
+            'website_name' => 'NewsPortal',
+            'website_url'  => 'https://newsportal.com',
+            'logo'         => 'logo/logo.png',
+        ]);
     }
 }

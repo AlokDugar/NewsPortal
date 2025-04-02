@@ -40,7 +40,7 @@
             <div class="col-12 p-0">
                 <div class="login-card">
                     <div>
-                        <div><a class="logo" href="index.html"><img class="img-fluid for-light" src="assets/images/logo/logo.png" alt="looginpage"></a></div>
+                        <div><a class="logo" href="#"><img class="img-fluid for-light" src="{{ asset(config('settings.logo')) }}" alt="logo"></a></div>
                         <div class="login-main">
                             <form class="theme-form" action="{{route('password.email')}}" method="POST">
                                 @csrf

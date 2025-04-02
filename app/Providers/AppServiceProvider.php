@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Setting;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,8 +21,15 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        $settings = Setting::first();
+        $logoPath = $settings->logo;
+
+        if (!Storage::disk('public')->exists($logoPath)) {
+            $logoPath = 'logo/default_logo.png';
+        }
+
+        Config::set('settings.logo', "storage/{$logoPath}");
     }
 }

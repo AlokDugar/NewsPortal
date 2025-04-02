@@ -86,21 +86,6 @@
             <tbody>
                 <tr>
                     <td>
-                        <table style="background-color: #f6f7fb; width: 100%">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table style="margin: 0 auto; margin-bottom: 30px">
-                                            <tbody>
-                                                <tr class="logo-sec" style="display: flex; align-items: center; justify-content: space-between; width: 650px;">
-                                                    <td><img class="img-fluid" width="70px" src="https://imgur.com/bAqVEcn.png" alt="Logo"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                         <table style="margin: 0 auto; background-color: #fff; border-radius: 8px">
                             <tbody>
                                 <tr>

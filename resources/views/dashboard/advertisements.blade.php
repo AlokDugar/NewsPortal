@@ -8,6 +8,12 @@
 <div class="page-body">
     <div class="container-fluid">
         <div class="page-title">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center justify-content-between" role="alert">
+                    <span>{{ session('success') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-sm-6">
                     <h3>Advertisements</h3>
@@ -108,7 +114,7 @@
                                                             <source src="{{ Str::startsWith($ad->details, 'http') ? $ad->details : asset('storage/' . $ad->details) }}" type="video/mp4">
                                                         </video>
                                                     @else
-                                                        <img src="{{ Str::startsWith($ad->details, 'http') ? $ad->details : asset('storage/' . $ad->details) }}" width="100" height="50" alt="Advertisement Image">
+                                                        <img src="{{ Str::startsWith($ad->details, 'http') ? $ad->details : asset('storage/' . $ad->details) }}" width="100" height="50" alt="">
                                                     @endif
                                                 </td>
                                                 <td>{{ $ad->url }}</td>
