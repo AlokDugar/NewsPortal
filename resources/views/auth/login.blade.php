@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="" content="">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="" type="image/x-icon">
+    
+    <link rel="icon" href="{{ asset('storage/' . ($settings->favicon ?? 'default-favicon.ico')) }}" type="image/x-icon">
     <link rel="shortcut icon" href="" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -40,7 +41,7 @@
             <div class="col-12 p-0">
                 <div class="login-card">
                     <div>
-                        <div><a class="logo" href="#"><img class="img-fluid for-light" src="{{ asset(config('settings.logo')) }}" alt="logo"></a></div>
+                        <div><a class="logo" href="#"><img class="img-fluid for-light" src="{{ asset(config('settings.dashboard_logo')) }}" alt="logo"></a></div>
                         <div class="login-main">
                             <form class="theme-form" action="{{url('/login')}}" method="POST">
                                 @csrf

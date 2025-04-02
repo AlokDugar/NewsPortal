@@ -24,12 +24,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $settings = Setting::first();
-        $logoPath = $settings->logo;
+        $dash_logoPath = $settings->dashboard_logo;
 
-        if (!Storage::disk('public')->exists($logoPath)) {
-            $logoPath = 'logo/default_logo.png';
+        if (!Storage::disk('public')->exists($dash_logoPath)) {
+            $dash_logoPath = 'dashboard_logo/default_logo.png';
         }
-
-        Config::set('settings.logo', "storage/{$logoPath}");
+        Config::set('settings.dashboard_logo', "storage/{$dash_logoPath}");
     }
 }

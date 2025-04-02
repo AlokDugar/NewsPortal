@@ -40,16 +40,27 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Website URL</label>
-                                    <input type="url" name="website_url" class="form-control" value="{{ $settings->website_url ?? '' }}" required>
+                                    <label>Site Logo</label>
+                                    @if($settings && $settings->site_logo)
+                                    <img src="{{ asset('storage/' . $settings->site_logo) }}" height="80" class="mt-2">
+                                    @endif
+                                    <input type="file" name="site_logo" class="form-control">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Logo</label>
-                                    <input type="file" name="logo" class="form-control">
-                                    @if($settings && $settings->logo)
-                                        <img src="{{ asset('storage/' . $settings->logo) }}" height="80" class="mt-2">
+                                    <label>Dashboard Logo</label>
+                                    @if($settings && $settings->dashboard_logo)
+                                    <img src="{{ asset('storage/' . $settings->dashboard_logo) }}" height="80" class="mt-2">
                                     @endif
+                                    <input type="file" name="dashboard_logo" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Favicon</label>
+                                    @if($settings && $settings->favicon)
+                                    <img src="{{ asset('storage/' . $settings->favicon) }}" height="40" class="mt-2">
+                                    @endif
+                                    <input type="file" name="favicon" class="form-control">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary mt-3">Save Settings</button>

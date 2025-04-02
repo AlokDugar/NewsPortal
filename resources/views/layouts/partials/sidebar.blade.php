@@ -2,7 +2,7 @@
     <div>
         <div class="logo-wrapper">
             <a href="{{route('home')}}">
-                <img class="img-fluid for-light" src="{{ asset(config('settings.logo')) }}" alt="logo">
+                <img class="img-fluid for-light" src="{{ asset(config('settings.dashboard_logo')) }}" alt="logo">
             </a>
         </div>
         <nav class="sidebar-main">

@@ -60,8 +60,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Setting::create([
             'website_name' => 'NewsPortal',
-            'website_url'  => 'https://newsportal.com',
-            'logo'         => 'logo/logo.png',
+            'dashboard_logo'=> 'logo/logo.png',
         ]);
     }
 }

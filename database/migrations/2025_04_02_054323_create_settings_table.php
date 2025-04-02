@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('website_name')->nullable();
-            $table->string('website_url')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('site_logo')->nullable();
+            $table->string('dashboard_logo')->nullable();
+            $table->string('favicon')->nullable();
             $table->timestamps();
         });
     }

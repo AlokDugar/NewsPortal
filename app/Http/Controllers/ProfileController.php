@@ -43,7 +43,7 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
 
         $user->save();
-        return redirect()->back()->with('success', 'Password updated successfully.');
+        return redirect()->route('profile.edit')->with('success', 'Password updated successfully.');
     }
 
     public function checkOldPassword(Request $request)
