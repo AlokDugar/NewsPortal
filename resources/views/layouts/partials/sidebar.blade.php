@@ -20,16 +20,16 @@
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="file-text"></i><span>News</span></a>
                         <ul class="sidebar-submenu">
-                            <li><a href="{{route('news.index')}}">Details</a></li>
                             <li><a href="{{route('categories.index')}}">Categories</a></li>
                             <li><a href="{{route('types.index')}}">Types</a></li>
+                            <li><a href="{{route('news.index')}}">Details</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="javascript:void(0)"><i data-feather="zap"></i><span>Advertisements</span></a>
                         <ul class="sidebar-submenu">
-                            <li><a href="{{route('ads.index')}}">ADs</a></li>
                             <li><a href="{{route('adTypes.index')}}">AD Types</a></li>
+                            <li><a href="{{route('ads.index')}}">AD Details</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-list"> <a class="sidebar-link sidebar-title link-nav" href="{{route('settings')}}"><i data-feather="settings"></i><span>General Settings</span></a></li>

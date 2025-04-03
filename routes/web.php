@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AdvertisementTypeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
