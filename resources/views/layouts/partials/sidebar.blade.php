@@ -1,8 +1,8 @@
 <div class="sidebar-wrapper">
     <div>
-        <div class="logo-wrapper">
-            <a href="{{route('home')}}">
-                <img class="img-fluid for-light" src="{{ asset(config('settings.dashboard_logo')) }}" alt="logo">
+        <div class="logo-wrapper" style="text-align: center;">
+            <a href="{{ route('home') }}">
+                <img class="img-fluid for-light" src="{{ asset(config('settings.dashboard_logo')) }}" alt="logo" style="display: inline-block;">
             </a>
         </div>
         <nav class="sidebar-main">

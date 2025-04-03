@@ -44,7 +44,7 @@
                                     @if($settings && $settings->site_logo)
                                     <img src="{{ asset('storage/' . $settings->site_logo) }}" height="80" class="mt-2">
                                     @endif
-                                    <input type="file" name="site_logo" class="form-control">
+                                    <input type="file" name="site_logo" class="form-control mt-3">
                                 </div>
 
                                 <div class="form-group">
@@ -52,7 +52,7 @@
                                     @if($settings && $settings->dashboard_logo)
                                     <img src="{{ asset('storage/' . $settings->dashboard_logo) }}" height="80" class="mt-2">
                                     @endif
-                                    <input type="file" name="dashboard_logo" class="form-control">
+                                    <input type="file" name="dashboard_logo" class="form-control mt-3">
                                 </div>
 
                                 <div class="form-group">
@@ -60,8 +60,9 @@
                                     @if($settings && $settings->favicon)
                                     <img src="{{ asset('storage/' . $settings->favicon) }}" height="40" class="mt-2">
                                     @endif
-                                    <input type="file" name="favicon" class="form-control">
+                                    <input type="file" name="favicon" class="form-control mt-3">
                                 </div>
+
 
                                 <button type="submit" class="btn btn-primary mt-3">Save Settings</button>
                             </form>
